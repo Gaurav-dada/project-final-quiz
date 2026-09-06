@@ -1,0 +1,268 @@
+/* ==============================
+Global Styles
+============================== */
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #f5f7fb;
+color: #1f2937;
+}
+
+/* ==============================
+Navigation Bar
+============================== */
+
+.navbar {
+height: 70px;
+background: #ffffff;
+border-bottom: 1px solid #e5e7eb;
+
+display: flex;
+align-items: center;
+
+padding: 0 40px;
+
+position: sticky;
+top: 0;
+z-index: 1000;
+
+
+}
+
+/* Logo */
+
+.logo {
+font-size: 24px;
+font-weight: 700;
+color: #2563eb;
+
+margin-right: 60px;
+
+
+}
+
+/* Navigation Links */
+
+.nav-links {
+display: flex;
+align-items: center;
+gap: 8px;
+
+list-style: none;
+
+
+}
+
+.nav-links li {
+display: flex;
+}
+
+.nav-links a {
+text-decoration: none;
+color: #4b5563;
+
+font-size: 14px;
+font-weight: 500;
+
+padding: 10px 16px;
+border-radius: 7px;
+
+
+}
+
+.nav-links a:hover {
+color: #2563eb;
+background: #eff6ff;
+}
+
+.nav-links a.active {
+color: #2563eb;
+background: #eff6ff;
+font-weight: 600;
+}
+
+/* ==============================
+Logout
+============================== */
+
+.logout {
+margin-left: auto;
+
+text-decoration: none;
+
+color: #dc2626;
+background: #fef2f2;
+
+padding: 9px 18px;
+
+border-radius: 7px;
+
+font-size: 14px;
+font-weight: 600;
+
+
+}
+
+.logout:hover {
+background: #fee2e2;
+}
+
+/* ==============================
+Main Container
+============================== */
+
+#container {
+display: flex;
+justify-content: center;
+}
+
+/* ==============================
+Main Form
+============================== */
+
+main {
+height: 600px;
+width: 65%;
+
+margin-top: 15px;
+padding: 40px;
+
+background-color: #eff6ff;
+
+border-radius: 20px;
+
+
+}
+
+/* ==============================
+Labels
+============================== */
+
+label {
+display: inline-block;
+
+font-size: 20px;
+font-weight: 600;
+
+color: #2563eb;
+
+margin-bottom: 8px;
+
+
+}
+
+/* ==============================
+Inputs
+============================== */
+
+input {
+height: 40px;
+width: 100%;
+
+padding: 10px 15px;
+
+border: 1px solid #d1d5db;
+border-radius: 7px;
+
+font-size: 15px;
+
+outline: none;
+
+
+}
+
+input:focus {
+border-color: #2563eb;
+}
+
+/* ==============================
+Description
+============================== */
+
+textarea {
+height: 100px;
+width: 500px;
+
+padding: 10px 15px;
+
+border: 1px solid #d1d5db;
+border-radius: 7px;
+
+font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+
+resize: none;
+
+outline: none;
+
+
+}
+
+textarea:focus {
+border-color: #2563eb;
+}
+
+/* ==============================
+Options
+============================== */
+
+#options {
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 20px;
+
+
+}
+
+.opt {
+height: 40px;
+width: 400px;
+
+padding: 0 20px;
+
+
+}
+
+/* ==============================
+Buttons
+============================== */
+
+button {
+padding: 10px 20px;
+
+border: none;
+border-radius: 7px;
+
+font-size: 15px;
+font-weight: 600;
+
+cursor: pointer;
+
+
+}
+
+/* Add Category */
+
+button[type="submit"] {
+background-color: #2563eb;
+color: white;
+}
+
+/* Clear */
+
+button[type="reset"] {
+background-color: #e5e7eb;
+color: #374151;
+
+margin-left: 10px;
+
+
+}
