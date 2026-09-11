@@ -1,5 +1,15 @@
 <?php
-include('connection.php');
+session_start();
+
+include("../db/connection.php");
+
+$username = $_SESSION['username'] ?? null;
+$user_id  = $_SESSION['user_id'] ?? null;
+
+if (!$user_id) {
+    header("Location: login.php");
+    exit;
+}
 
 // Get category ID from URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
@@ -24,7 +34,7 @@ $category = $category_result->fetch_assoc();
 
 
 // Get questions from this category
-$sql = "SELECT * FROM questions WHERE catagorie_id = ?";
+$sql = "SELECT * FROM questions WHERE catagorie_id = ? AND is_active=1";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $category_id);
 $stmt->execute();
@@ -44,27 +54,27 @@ $question_result = $stmt->get_result();
 
     <title>Questions</title>
 
-    <link rel="stylesheet" href="questionview.css">
+    <link rel="stylesheet" href="../css/questionview.css">
 </head>
 
 <body>
 
-<nav class="navbar">
+ <!-- Navigation Bar -->
+    <nav class="navbar">
 
-    <div class="logo">QuizMaster</div>
+        <div class="logo">QuizMaster</div>
 
-    <ul class="nav-links">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#" class="active">Manage Quiz</a></li>
-        <li><a href="#">User Management</a></li>
-        <li><a href="#">Result</a></li>
-        <li><a href="#">Analysis</a></li>
-    </ul>
+        <ul class="nav-links">
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
+        
+        </ul>
 
-    <a href="#" class="logout">Logout</a>
+        <a href="logout.php" class="logout">Logout</a>
 
-</nav>
-
+    </nav>
 
 <main class="main-content">
 
@@ -204,10 +214,10 @@ async function deleteQuestion(questionId) {
     if (confirmDelete) {
 
         const response = await fetch(
-            `deletequestion.php?id=${questionId}`
+            `../db/deletequestion.php?id=${questionId}`
         );
 
-        const data = await response.text();
+        const data = await response.json();
 
         console.log(data);
         window.location.reload();

@@ -11,45 +11,45 @@ $category_id = $_GET['id'];
 
     $conn->begin_transaction();
 
-    // Delete options
-    $stm = $conn->prepare(
-        "DELETE FROM optionss WHERE category_id = ?"
-    );
+    // // Delete options
+    // $stm = $conn->prepare(
+    //     "DELETE FROM optionss WHERE category_id = ?"
+    // );
 
-    if (!$stm) {
-        throw new Exception("Failed to prepare options query");
-    }
+    // if (!$stm) {
+    //     throw new Exception("Failed to prepare options query");
+    // }
 
-    $stm->bind_param("i", $category_id);
+    // $stm->bind_param("i", $category_id);
 
-    if (!$stm->execute()) {
-        throw new Exception("Failed to delete options");
-    }
+    // if (!$stm->execute()) {
+    //     throw new Exception("Failed to delete options");
+    // }
 
-    $stm->close();
+    // $stm->close();
 
 
-    // Delete questions
-    $stm = $conn->prepare(
-        "DELETE FROM questions WHERE catagorie_id = ?"
-    );
+    // // Delete questions
+    // $stm = $conn->prepare(
+    //     "DELETE FROM questions WHERE catagorie_id = ?"
+    // );
 
-    if (!$stm) {
-        throw new Exception("Failed to prepare questions query");
-    }
+    // if (!$stm) {
+    //     throw new Exception("Failed to prepare questions query");
+    // }
 
-    $stm->bind_param("i", $category_id);
+    // $stm->bind_param("i", $category_id);
 
-    if (!$stm->execute()) {
-        throw new Exception("Failed to delete questions");
-    }
+    // if (!$stm->execute()) {
+    //     throw new Exception("Failed to delete questions");
+    // }
 
-    $stm->close();
+    // $stm->close();
 
 
     // Delete category
     $stm = $conn->prepare(
-        "DELETE FROM catagories WHERE id = ?"
+        "UPDATE catagories SET  is_active=0 WHERE id = ?"
     );
 
     if (!$stm) {

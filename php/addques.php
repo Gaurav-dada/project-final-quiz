@@ -1,6 +1,16 @@
 <?php
-include("connection.php");
+session_start();
 
+include("../db/connection.php");
+
+$username = $_SESSION['username'] ?? null;
+$user_id  = $_SESSION['user_id'] ?? null;
+
+if (!$user_id) {
+    header("Location:login.php");
+    exit;
+}
+$user_id=$_SESSION['user_id'];
 if (isset($_POST['submit'])) {
     $category_name=(string) $_GET['category_name'];
     $category_id = (int) $_GET['category_id'];
@@ -36,7 +46,7 @@ if (isset($_POST['submit'])) {
             $category_id,
             $question,
             $correct,
-            $category
+            $category_name
         );
 
         $sql->execute();
@@ -109,22 +119,23 @@ if (isset($_POST['submit'])) {
 
     <title>Add Category</title>
 
-    <link rel="stylesheet" href="addques.css">
+    <link rel="stylesheet" href="../css/addques.css">
 </head>
 
 <body>
 
+  
     <!-- Navigation Bar -->
     <nav class="navbar">
 
         <div class="logo">QuizMaster</div>
 
         <ul class="nav-links">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#" class="active">Manage Quiz</a></li>
-            <li><a href="#">User Management</a></li>
-            <li><a href="#">Result</a></li>
-            <li><a href="#">Analysis</a></li>
+            <li><a href="adminpage.php">Dashboard</a></li>
+            <li><a href="category.php" >Manage Quiz</a></li>
+            <li><a href="usermanage.php">User Management</a></li>
+            <li><a href="adminresultanalysis.php">Result and Analysis</a></li>
+        
         </ul>
 
         <a href="#" class="logout">Logout</a>
@@ -135,9 +146,6 @@ if (isset($_POST['submit'])) {
     <main id="container">
 
         <form method="POST" action="">
-
-         
-
 
             <label for="question">
                 Question:

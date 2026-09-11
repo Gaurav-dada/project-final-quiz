@@ -1,7 +1,15 @@
 <?php
-include('connection.php');
+session_start();
 
+include("../db/connection.php");
 
+$username = $_SESSION['username'] ?? null;
+$user_id  = $_SESSION['user_id'] ?? null;
+
+if (!$user_id) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +20,7 @@ include('connection.php');
 
     <title>Manage Quiz</title>
 
-    <link rel="stylesheet" href="category.css">
+    <link rel="stylesheet" href="../css/category.css">
 </head>
 
 <body>
@@ -23,17 +31,16 @@ include('connection.php');
         <div class="logo">QuizMaster</div>
 
         <ul class="nav-links">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#" class="active">Manage Quiz</a></li>
-            <li><a href="#">User Management</a></li>
-            <li><a href="#">Result</a></li>
-            <li><a href="#">Analysis</a></li>
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
+        
         </ul>
 
-        <a href="#" class="logout">Logout</a>
+        <a href="logout.php" class="logout">Logout</a>
 
     </nav>
-
 
     <!-- Main Content -->
     <main class="main-content">
@@ -74,7 +81,7 @@ include('connection.php');
                     </thead>
                     <tbody>         
                     <?php
-                      $sql="SELECT * FROM catagories ";
+                      $sql="SELECT * FROM catagories WHERE is_active=1";
                     $stm=$conn->prepare($sql);
                     $stm->execute();
                     $result=$stm->get_result();
@@ -140,7 +147,7 @@ include('connection.php');
         let categoryValue=category.innerText.trim();
         let descriptionValue=description.innerText.trim();
         try{
-        const response=await fetch('updatecat.php',{
+        const response=await fetch('../db/updatecat.php',{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
@@ -181,7 +188,7 @@ include('connection.php');
         async function delbtn(num){
             let confirmdel=confirm("Are you sure You want to delete this category");
             if(confirmdel){
-            const response= await fetch(`delcat.php?id=${num}`);
+            const response= await fetch(`../db/delcat.php?id=${num}`);
             const data= await response.json();
             if(data.success){
                 window.location.href="category.php";

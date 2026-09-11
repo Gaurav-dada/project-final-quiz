@@ -2,8 +2,18 @@
 
 
 <?php
+session_start();
 
-include('connection.php');
+include("../db/connection.php");
+
+$username = $_SESSION['username'] ?? null;
+$user_id  = $_SESSION['user_id'] ?? null;
+
+if (!$user_id) {
+    header("Location: login.php");
+    exit;
+}
+
 
 $category_id = $_GET['catid'] ?? null;
 $question_id = $_GET['id'] ?? null;
@@ -66,31 +76,32 @@ while ($row = $optionsResult->fetch_assoc()) {
 
     <title>Edit Question</title>
 
-    <link rel="stylesheet" href="addques.css">
+    <link rel="stylesheet" href="../css/addques.css">
 </head>
 
 <body>
 
-<nav class="navbar">
 
-    <div class="logo">QuizMaster</div>
+  <!-- Navigation Bar -->
+    <nav class="navbar">
 
-    <ul class="nav-links">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="#" class="active">Manage Quiz</a></li>
-        <li><a href="#">User Management</a></li>
-        <li><a href="#">Result</a></li>
-        <li><a href="#">Analysis</a></li>
-    </ul>
+        <div class="logo">QuizMaster</div>
 
-    <a href="#" class="logout">Logout</a>
+        <ul class="nav-links">
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
+        
+        </ul>
 
-</nav>
+        <a href="logout.php" class="logout">Logout</a>
 
+    </nav>
 
 <main id="container">
 
-    <form method="POST" action="updatequestion.php?catyid=<?= $category_id ?>">
+    <form method="POST" action="../db/updatequestion.php?catyid=<?= $category_id ?>">
 
 
         <input
