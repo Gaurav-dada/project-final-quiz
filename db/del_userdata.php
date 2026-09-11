@@ -18,35 +18,8 @@ $conn->begin_transaction();
 $success = true;
 
 
-$tables = [
-    "user_answer",
-    "user_activity",
-    "quiz_attempts"
-    
-];
 
-foreach ($tables as $table) {
-
-    $st = "DELETE FROM $table WHERE user_id = ?";
-    $stm = $conn->prepare($st);
-
-    if (!$stm) {
-        $success = false;
-        break;
-    }
-
-    $stm->bind_param("i", $id);
-
-    if (!$stm->execute()) {
-        $success = false;
-         echo $stm->error;
-        break;
-    }
-
-    $stm->close();
-}
-
-  $st = "DELETE FROM users WHERE id = ?";
+  $st = "UPDATE users SET is_activity =0 WHERE id = ?";
     $stm = $conn->prepare($st);
 
     if (!$stm) {
