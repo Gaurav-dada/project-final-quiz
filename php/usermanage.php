@@ -132,7 +132,7 @@ async function user_data() {
         userdata.innerHTML = "";
 
         data.data.forEach(element => {
-
+            if(element.username!="admin"){
             userdata.innerHTML += `
                 <tr>
                     <td>${element.id}</td>
@@ -151,6 +151,7 @@ async function user_data() {
                     </td>
                 </tr>
             `;
+}
 
         });
 
@@ -179,6 +180,7 @@ window.deleteUser = async function(id) {
         }
 
         const data = await res.json();
+        console.log(data)
 
         if (data.success) {
 

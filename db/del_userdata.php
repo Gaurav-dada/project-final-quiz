@@ -19,7 +19,7 @@ $success = true;
 
 
 
-  $st = "UPDATE users SET is_activity =0 WHERE id = ?";
+  $st = "UPDATE users SET is_active =0 WHERE id = ?";
     $stm = $conn->prepare($st);
 
     if (!$stm) {
