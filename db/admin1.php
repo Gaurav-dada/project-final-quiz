@@ -7,7 +7,7 @@ $questionIds = [];
 $userIds = [];
 
 // Get question IDs
-$stmt = $conn->prepare("SELECT id FROM questions");
+$stmt = $conn->prepare("SELECT id FROM questions WHERE is_active=1");
 $stmt->execute();
 $result = $stmt->get_result();
 

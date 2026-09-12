@@ -3,7 +3,7 @@ include("connection.php");
 
 header('Content-Type: application/json');
 
-$st = "SELECT id, catagorie_name ,description FROM catagories WHERE is_active=1";
+$st = "SELECT id, catagorie_name ,totalques,description FROM catagories WHERE is_active=1";
 $stm = $conn->prepare($st);
 
 if (!$stm) {

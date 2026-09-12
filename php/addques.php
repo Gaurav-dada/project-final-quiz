@@ -25,11 +25,6 @@ if (isset($_POST['submit'])) {
 
         $conn->begin_transaction();
 
-       
-
-        
-
-
         // Insert question
         $st = "INSERT INTO questions
                (catagorie_id, question, correct_answer, category_name)
@@ -84,11 +79,22 @@ if (isset($_POST['submit'])) {
                 $is_correct,
                 $question_id
             );
-
             $stm->execute();
         }
 
+// Increase total question count
+$update = "UPDATE catagories
+           SET totalques = totalques + 1
+           WHERE id = ?";
 
+$updateStmt = $conn->prepare($update);
+
+if (!$updateStmt) {
+    throw new Exception($conn->error);
+}
+
+$updateStmt->bind_param("i", $category_id);
+$updateStmt->execute();
         // Everything succeeded
         $conn->commit();
 

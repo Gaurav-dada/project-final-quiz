@@ -50,7 +50,9 @@ $userId = $_SESSION['user_id'];
     
 
         <div id="question">
-            <h1></h1>
+            <h1>
+
+            </h1>
         </div>
 
         <div id="options">
@@ -329,6 +331,46 @@ async function startQuiz(category_id){
     skip.style.display = "inline-block";
 }
 
+async function checkQuiz(id) {
+    try {
+        const response = await fetch(`../db/disques.php?id=${id}`);
+        const data = await response.json();
+
+        if (!data.data || data.data.length === 0) {
+
+            ques_no.innerHTML = "NO QUIZ AVAILABLE";
+
+            ques.innerHTML = `
+                <a href="quizcat.php" class="category-link">
+                    Go to Categories
+                </a>
+            `;
+
+            star.style.display = "none";
+            next.style.display = "none";
+            skip.style.display = "none";
+            submit.style.display = "none";
+
+            return false;
+        }
+
+        quizdata = data;
+        return true;
+
+    } catch (error) {
+        console.error("Error:", error);
+        return false;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const hasQuiz = await checkQuiz(currentId);
+
+    if (hasQuiz) {
+        star.style.display = "block";
+    }
+});
+
 
 let currentId = new URLSearchParams(window.location.search).get("id");
 star.addEventListener("click",async ()=>{
@@ -363,8 +405,8 @@ async function getques(id){
 function showques(dat){
         answered=false;
         ques_next=dat;
-       
-        ques_no.innerHTML=`Queston NO ${quesno+1}/${dat.data.length}`;
+       if(dat.data.length>0){
+        ques_no.innerHTML=`Question NO ${quesno+1}/${dat.data.length}`;
         ques.innerHTML=dat.data[quesno].question;
         getoption(currentId);
           if (quesno >= dat.data.length - 1) {
@@ -376,7 +418,15 @@ function showques(dat){
         skip.style.display = "block";
         next.style.display = "block";
         submit.style.display = "none";
-    }
+    }}
+    else{
+   ques_no.innerHTML = `
+            NO QUIZ AVAILABLE
+            <a href="quizcat.php" class="category-link">
+                Go to Categories
+            </a>
+        `;
+}
 }
 
 

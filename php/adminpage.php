@@ -26,51 +26,36 @@ if (!$user_id) {
 <body>
    <div class="container">
     
-    <header class="header">
+        <nav class="navbar">
+
+        <div class="logo">QuizMaster</div>
+
+        <ul class="nav-links">
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+        </ul>
+        <div class="main-profile">
+        <div class="profile">
+            <div class="profimg">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
             <path d="M463 448.2C440.9 409.8 399.4 384 352 384L288 384C240.6 384 199.1 409.8 177 448.2C212.2 487.4 263.2 512 320 512C376.8 512 427.8 487.3 463 448.2zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 336C359.8 336 392 303.8 392 264C392 224.2 359.8 192 320 192C280.2 192 248 224.2 248 264C248 303.8 280.2 336 320 336z"/>
         </svg>
+        <p style="width:115px; font-size:13px; white-space:nowrap;">
+    <?php echo $username; ?>
+</p>
+            </div>
+        <a href="logout.php" class="logout">Logout</a>
+</div>
+</div>
+    </nav>
+     
+    
+   
 
-        <p>Hello!<br>
-            <?php echo "$username"?>
-        </p>
-          </header>
-
-  <aside class="sidebar">
-     <div id="dashboard">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-            <path d="M341.8 72.6C329.5 61.2 310.5 61.2 298.3 72.6L74.3 280.6C64.7 289.6 61.5 303.5 66.3 315.7C71.1 327.9 82.8 336 96 336L112 336L112 512C112 547.3 140.7 576 176 576L464 576C499.3 576 528 547.3 528 512L528 336L544 336C557.2 336 569 327.9 573.8 315.7C578.6 303.5 575.4 289.5 565.8 280.6L341.8 72.6zM304 384L336 384C362.5 384 384 405.5 384 432L384 528L256 528L256 432C256 405.5 277.5 384 304 384z"/>
-        </svg>
-        <a href="../php/adminpage.php" target="">DashBoard</a>
-    </div>
-
-    <div id="create">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-            <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/>
-        </svg>
-        <a href="../php/category.php " target="">Manage Quiz</a>
-    </div>
-
-    <div id="manage">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-            <path d="M463 448.2C440.9 409.8 399.4 384 352 384L288 384C240.6 384 199.1 409.8 177 448.2C212.2 487.4 263.2 512 320 512C376.8 512 427.8 487.3 463 448.2zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 336C359.8 336 392 303.8 392 264C392 224.2 359.8 192 320 192C280.2 192 248 224.2 248 264C248 303.8 280.2 336 320 336z"/>
-        </svg>
-        <a href="../php/usermanage.php"  target="">User Management</a>
-    </div>
-
-    <div id="result">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-            <path d="M544 160C544 124.7 515.3 96 480 96L160 96C124.7 96 96 124.7 96 160L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 160zM352 216C352 229.3 341.3 240 328 240L216 240C202.7 240 192 229.3 192 216C192 202.7 202.7 192 216 192L328 192C341.3 192 352 202.7 352 216zM424 296C437.3 296 448 306.7 448 320C448 333.3 437.3 344 424 344L216 344C202.7 344 192 333.3 192 320C192 306.7 202.7 296 216 296L424 296zM288 424C288 437.3 277.3 448 264 448L216 448C202.7 448 192 437.3 192 424C192 410.7 202.7 400 216 400L264 400C277.3 400 288 410.7 288 424z"/>
-        </svg>
-        <a href="../php/adminresultanalysis.php"  target="">Result & Analysis</a>
-    </div>
-
-    <div id="logout">
-        <img src="C:\xampp\htdocs\gauravproj\expense-tracker\image\logout.png">
-        <a href="../php/logout.php">Logout</a>
-    </div>
-  </aside>
+  
 
   
   <main class="content">

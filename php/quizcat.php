@@ -70,7 +70,7 @@ console.log(data)
         const h = document.createElement("h3");
         const p = document.createElement("p");
 
-        h.textContent = element.catagorie_name;
+       h.textContent = `${element.catagorie_name} - ${element.totalques} Questions`;
         p.textContent = element.description;
 
         div.appendChild(h);

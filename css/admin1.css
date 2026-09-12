@@ -16,142 +16,157 @@ body {
 
 
 /* ==============================
-   Main Container
-============================== */
-
-.container {
-    display: grid;
-
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 80px 1fr;
-
-    grid-template-areas:
-        "header header"
-        "sidebar content";
-
-    min-height: 100vh;
-}
-
-
-/* ==============================
    Header
 ============================== */
 
 .header {
-    grid-area: header;
+    height: 80px;
 
     display: flex;
     align-items: center;
 
     gap: 10px;
-
     padding: 0 40px;
 
     background-color: #ffffff;
-
     border-bottom: 1px solid #e5e7eb;
 }
 
 .header svg {
     height: 45px;
     width: 45px;
-
     fill: #2563eb;
 }
 
 .header p {
     font-size: 20px;
     font-weight: 700;
-
     color: #1f2937;
 }
 
 
 /* ==============================
-   Sidebar
+   Navbar
 ============================== */
 
-.sidebar {
-    grid-area: sidebar;
+.navbar {
+    height: 70px;
 
-    display: flex;
-    flex-direction: column;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
 
-    gap: 10px;
-
-    padding: 30px 20px;
-
-    background-color: #1e293b;
-
-    min-height: calc(100vh - 80px);
-}
-
-
-/* Sidebar Items */
-
-.sidebar div {
     display: flex;
     align-items: center;
 
+    padding: 0 40px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+/* Logo */
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2563eb;
+
+    margin-right: 60px;
+}
+
+
+/* Navigation Links */
+
+.nav-links {
+    display: flex;
+    align-items: center;
     gap: 10px;
 
-    height: 50px;
-    width: 100%;
-
-    padding: 10px;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-
-    background-color: #ffffff;
+    list-style: none;
 }
 
-
-/* Sidebar Icons */
-
-.sidebar div svg,
-.sidebar div img {
-    height: 30px;
-    width: 30px;
+.nav-links li {
+    display: flex;
 }
 
-
-/* Sidebar Links */
-
-.sidebar div a {
+.nav-links a {
     text-decoration: none;
 
     color: #4b5563;
 
     font-size: 14px;
+    font-weight: 500;
 
+    padding: 10px 16px;
+    border-radius: 7px;
+
+    transition: all 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+    background: #eff6ff;
+}
+
+.nav-links a.active {
+    color: #2563eb;
+    background: #eff6ff;
     font-weight: 600;
 }
 
 
-/* Sidebar Hover */
+/* ==============================
+   Profile
+============================== */
 
-.sidebar div:hover {
-    transform: scale(1.02);
+.main-profile {
+    margin-left: auto;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.profimg {
+    display: flex;
+    align-items: center;
 }
 
 
 /* ==============================
-   Sidebar Colors
+   Logout
 ============================== */
 
-#dashboard {
-    background-color: #dcfce7;
+.logout {
+    margin-left: auto;
+
+    text-decoration: none;
+
+    color: #dc2626;
+    background: #fef2f2;
+
+    padding: 9px 18px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
 }
 
-#dashboard svg {
-    fill: #16a34a;
+.logout:hover {
+    background: #fee2e2;
 }
+
+
+/* ==============================
+   Menu Colors
+============================== */
 
 #create {
     background-color: #eff6ff;
@@ -179,8 +194,6 @@ body {
 
 #logout {
     background-color: #fef2f2;
-
-    margin-top: auto;
 }
 
 #logout img {
@@ -189,17 +202,15 @@ body {
 
 
 /* ==============================
-   Dashboard Content
+   Main Content
 ============================== */
 
 .content {
-    grid-area: content;
+    width: 100%;
 
     padding: 20px 40px;
 
     background-color: #f5f7fb;
-
-    align-self: start;
 }
 
 
@@ -211,11 +222,9 @@ body {
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     width: 100%;
-
     min-height: 70px;
 
     padding: 10px 20px;
@@ -223,25 +232,21 @@ body {
     background-color: #ffffff;
 
     border: 1px solid #e5e7eb;
-
     border-radius: 7px;
 }
 
 .stats h1 {
     font-size: 24px;
-
     color: #1f2937;
 }
 
 .stats select {
     height: 35px;
-
     width: 150px;
 
     padding: 5px;
 
     font-size: 15px;
-
     font-weight: 600;
 
     color: #374151;
@@ -249,7 +254,6 @@ body {
     background-color: #ffffff;
 
     border: 1px solid #d1d5db;
-
     border-radius: 6px;
 
     cursor: pointer;
@@ -257,7 +261,6 @@ body {
 
 .stats select:focus {
     outline: none;
-
     border-color: #2563eb;
 }
 
@@ -270,7 +273,6 @@ body {
     display: flex;
 
     justify-content: flex-start;
-
     align-items: center;
 
     gap: 20px;
@@ -294,10 +296,7 @@ body {
 
     padding: 20px;
 
-    margin: 0;
-
     width: 350px;
-
     height: 100px;
 
     background-color: #f1cf48;
@@ -310,7 +309,6 @@ body {
 
 .user svg {
     height: 50px;
-
     width: 40px;
 
     margin-right: 5px;
@@ -328,13 +326,11 @@ body {
 
 .user h2 {
     font-size: 25px;
-
     font-weight: 700;
 }
 
 .user h1 {
     font-size: 16px;
-
     font-weight: 600;
 }
 
@@ -344,7 +340,7 @@ body {
 ============================== */
 
 .usermanage {
-    grid-area: content;
+    width: 100%;
 
     padding: 20px 40px;
 
@@ -358,16 +354,8 @@ body {
 
 @media (max-width: 1000px) {
 
-    .container {
-        grid-template-columns: 230px 1fr;
-    }
-
     .header {
         padding: 0 25px;
-    }
-
-    .sidebar {
-        padding: 25px 15px;
     }
 
     .content {
@@ -382,20 +370,6 @@ body {
 
 @media (max-width: 750px) {
 
-    .container {
-        grid-template-columns: 1fr;
-
-        grid-template-rows: 80px auto 1fr;
-
-        grid-template-areas:
-            "header"
-            "sidebar"
-            "content";
-
-        min-height: 100vh;
-    }
-
-
     /* Header */
 
     .header {
@@ -403,24 +377,25 @@ body {
     }
 
 
-    /* Sidebar */
+    /* Navbar */
 
-    .sidebar {
-        flex-direction: row;
+    .navbar {
+        padding: 10px 20px;
 
-        min-height: auto;
+        flex-wrap: wrap;
 
-        padding: 10px;
+        height: auto;
 
+        gap: 10px;
+    }
+
+    .logo {
+        margin-right: 20px;
+    }
+
+    .nav-links {
         overflow-x: auto;
-    }
-
-    .sidebar div {
-        min-width: 150px;
-    }
-
-    #logout {
-        margin-top: 0;
+        width: 100%;
     }
 
 
@@ -466,22 +441,18 @@ body {
 
 @media (max-width: 500px) {
 
+    .header {
+        height: 70px;
+        padding: 0 15px;
+    }
+
     .header svg {
         height: 40px;
-
         width: 40px;
     }
 
     .header p {
         font-size: 18px;
-    }
-
-    .sidebar div {
-        min-width: 130px;
-    }
-
-    .sidebar div a {
-        font-size: 12px;
     }
 
     .content {
@@ -490,5 +461,10 @@ body {
 
     .stats h1 {
         font-size: 20px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+        padding: 8px 10px;
     }
 }
