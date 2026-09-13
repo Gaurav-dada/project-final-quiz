@@ -85,6 +85,16 @@ if (!$user_id) {
                 <h2 id="quesnum"></h2>
                     <h1>Total Questions</h1>
             </div>
+            
+</div>
+            
+             <div style=" color:white ; display:flex; gap:10px;  align-item:center;width:385px; height:100px; padding:20px 0px 20px 25px; ; border-radius:10px; background-color:pink">
+                <p style="heigth:40px; width:40px; font-size:30px;">📖 </p>
+                <div>
+             <h2 id="catnum"  ></h2>
+                    <h1 style="font-size: 16px;
+    font-weight: 600;">Total Category</h1>
+    </div
             </div>
         </div>
   </main>
@@ -93,6 +103,7 @@ if (!$user_id) {
 <script>
    const quesnum = document.getElementById("quesnum");
     const usernum = document.getElementById("users");
+    const catnum = document.getElementById("catnum");
 
 
     // Get total users and total questions
@@ -101,19 +112,22 @@ if (!$user_id) {
         try {
 
             const res = await fetch('../db/admin1.php');
-
+            const rescat =await fetch('../db/getcategory.php');
             if (!res.ok) {
                 throw new Error("Failed to fetch dashboard data");
             }
 
             const data = await res.json();
-            console.log(data)
+            const countcat=await rescat.json();
+            console.log(countcat)
             // Total questions
             quesnum.textContent = data.data.length;
 
             // Total users
             usernum.textContent = data.user.length;
 
+            //Total category
+            catnum.textContent =countcat.data.length;
         } catch (error) {
 
             console.error("Dashboard error:", error);
