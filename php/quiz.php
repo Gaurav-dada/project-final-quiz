@@ -20,56 +20,140 @@ $userId = $_SESSION['user_id'];
 
 <body>
 
-<div class="header">
 
-    <div class="cate">
-        <select id="category"></select>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+
+    <div class="logo">QuizMaster</div>
+
+    <ul class="nav-links">
+        <li>
+            <a href="studentpage.php">Dashboard</a>
+        </li>
+
+        <li>
+            <a href="quizcat.php">Browse Quiz</a>
+        </li>
+
+        <li>
+            <a href="stuquizhistory.php">Result and Analysis</a>
+        </li>
+    </ul>
+
+    <div class="main-profile">
+
+        <div class="profile">
+
+            <div class="profimg">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 640 640">
+
+                    <path d="M463 448.2C440.9 409.8 399.4 384 352 384L288 384C240.6 384 199.1 409.8 177 448.2C212.2 487.4 263.2 512 320 512C376.8 512 427.8 487.3 463 448.2zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320zM320 336C359.8 336 392 303.8 392 264C392 224.2 359.8 192 320 192C280.2 192 248 224.2 248 264C248 303.8 280.2 336 320 336z"/>
+
+                </svg>
+
+                <p>
+                    <?php echo $username; ?>
+                </p>
+
+            </div>
+
+            <a href="logout.php" class="logout">
+                Logout
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="timer-box">
-    Time: <span id="timer">60</span>
-</div>
+</nav>
 
-    <div class="score-box">
-        Score: <span id="score">0</span>
-    </div>
 
-    <div class="head">
-        <h1>Quiz System</h1>
-    </div>
+<!-- QUIZ -->
 
-</div>
-
-<div class="main">
+<main class="main">
 
     <div class="container">
+
+        <!-- TOP INFO -->
+
+        <div class="quiz-top">
+
+         
+            <div class="quiz-info">
+
+                <div class="timer-box">
+                    Time:
+                    <span id="timer">60</span>
+                </div>
+
+                <div class="score-box">
+                    Score:
+                    <span id="score">0</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION NUMBER -->
 
         <div class="head">
             <h2></h2>
         </div>
-    
+
+
+        <!-- QUESTION -->
 
         <div id="question">
-            <h1>
-
-            </h1>
+            <h1></h1>
         </div>
+
+
+        <!-- OPTIONS -->
 
         <div id="options">
             <ul></ul>
         </div>
 
+
+        <!-- BUTTONS -->
+
         <div class="button">
-            <button id="start">Start Quiz</button>
-            <button name="nex" style="display:none;" id="nex">Next</button>
-            <button name ="ski" style="display:none;" id="ski">Skip</button>
-            <button id="sub" name="submit" style="display:none;">Submit</button>
+
+            <button id="start">
+                Start Quiz
+            </button>
+
+            <button
+                name="nex"
+                id="nex"
+                style="display:none;">
+                Next
+            </button>
+
+            <button
+                name="ski"
+                id="ski"
+                style="display:none;">
+                Skip
+            </button>
+
+            <button
+                id="sub"
+                name="submit"
+                style="display:none;">
+                Submit
+            </button>
+
         </div>
 
     </div>
 
-</div>
-
+</main>
 <script >
     
 
@@ -459,6 +543,7 @@ function showoption(data) {
                 li.addEventListener("click", () => {
                     if (answered) return;
                     answered = true;
+                    skip.style.display = "none";
                     const question_id = ques_next.data[quesno].id;
                     const answer = element.option_;
                     const category_id = currentId;
@@ -475,7 +560,7 @@ function showoption(data) {
                             attempt_id
                         })
                     });
-                    const result = await res.text();
+                    const result = await res.json();
                     console.log(result) ;  
                 }
                     submitAnswer();
@@ -496,6 +581,7 @@ function showoption(data) {
 //display next question 
 
 function next_ques(){
+    
    if(!answered){
         alert("must choose ");
         return;
@@ -508,7 +594,8 @@ function next_ques(){
     else{
         answered=false
     showques(ques_next);
-    
+    skip.style.display = "block";
+
     }
 }
 
@@ -519,8 +606,8 @@ function skip_tonext(){
     quesno++;
     if(quesno>=ques_next.data.length){
         alert("quiz completed");
-        return;
-    }
+        submitQuiz();
+} 
     else{
     showques(ques_next);
    

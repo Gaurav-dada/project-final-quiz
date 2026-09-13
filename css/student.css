@@ -1,11 +1,15 @@
-/* ==============================
-   Global Styles
-============================== */
+/* ==================================================
+   GLOBAL STYLES
+================================================== */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -14,180 +18,61 @@ body {
     color: #1f2937;
 }
 
-
-/* ==============================
-   Header
-============================== */
-
-.header {
-    height: 80px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 10px;
-    padding: 0 40px;
-
-    background-color: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.header svg {
-    height: 45px;
-    width: 45px;
-    fill: #2563eb;
-}
-
-.header p {
-    font-size: 20px;
-    font-weight: 700;
-    color: #1f2937;
+.container {
+    width: 100%;
+    min-height: 100vh;
 }
 
 
-/* ==============================
-   Navbar
-============================== */
+/* ==================================================
+   NAVBAR
+================================================== */
 
 .navbar {
+    width: 100%;
     height: 70px;
-
-    background: #ffffff;
-    border-bottom: 1px solid #e5e7eb;
 
     display: flex;
     align-items: center;
 
     padding: 0 40px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
 
     position: sticky;
     top: 0;
+
     z-index: 1000;
 }
 
 
-/* Logo */
+/* ==================================================
+   LOGO
+================================================== */
 
 .logo {
     font-size: 24px;
     font-weight: 700;
+
     color: #2563eb;
 
-    margin-right: 60px;
-}
-
-
-/* ==============================
-   Sidebar / Top Navigation
-============================== */
-
-.sidebar {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    padding: 12px 30px;
-
-    background: #ffffff;
-
-    border-bottom: 1px solid #e5e7eb;
-
-    overflow-x: auto;
-}
-
-.sidebar div {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 10px 16px;
-
-    border-radius: 7px;
-
-    flex-shrink: 0;
-
-    transition: 0.2s;
-}
-
-.sidebar div:hover {
-    background-color: #f3f4f6;
-}
-
-.sidebar svg {
-    width: 25px;
-    height: 25px;
-}
-
-.sidebar a {
-    text-decoration: none;
-
-    color: #4b5563;
-
-    font-size: 14px;
-    font-weight: 500;
+    margin-right: 50px;
 
     white-space: nowrap;
 }
 
-.sidebar div:hover a {
-    color: #2563eb;
-}
 
-
-/* ==============================
-   Navigation Colors
-============================== */
-
-#dashboard {
-    background-color: #eff6ff;
-}
-
-#dashboard svg {
-    fill: #2563eb;
-}
-
-#create {
-    background-color: #eff6ff;
-}
-
-#create svg {
-    fill: #2563eb;
-}
-
-#result {
-    background-color: #ede9fe;
-}
-
-#result svg {
-    fill: #7c3aed;
-}
-
-#logout {
-    background-color: #fef2f2;
-}
-
-#logout img {
-    width: 25px;
-    height: 25px;
-
-    object-fit: contain;
-}
-
-
-/* ==============================
-   Navigation Links
-============================== */
+/* ==================================================
+   NAVIGATION LINKS
+================================================== */
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 10px;
+
+    gap: 8px;
 
     list-style: none;
 }
@@ -204,28 +89,31 @@ body {
     font-size: 14px;
     font-weight: 500;
 
-    padding: 10px 16px;
+    padding: 10px 15px;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
     transition: all 0.2s ease;
 }
 
 .nav-links a:hover {
     color: #2563eb;
+
     background: #eff6ff;
 }
 
 .nav-links a.active {
     color: #2563eb;
+
     background: #eff6ff;
+
     font-weight: 600;
 }
 
 
-/* ==============================
-   Profile
-============================== */
+/* ==================================================
+   PROFILE / USER AREA IN NAVBAR
+================================================== */
 
 .main-profile {
     margin-left: auto;
@@ -233,35 +121,53 @@ body {
 
 .profile {
     display: flex;
-
     align-items: center;
 
-    justify-content: flex-end;
+    gap: 18px;
 }
 
 .profimg {
     display: flex;
-
     align-items: center;
+
+    gap: 8px;
+}
+
+.profimg svg {
+    width: 32px;
+    height: 32px;
+
+    fill: #2563eb;
+}
+
+.profimg p {
+    width: 115px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #374151;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
-/* ==============================
-   Logout
-============================== */
+/* ==================================================
+   LOGOUT
+================================================== */
 
 .logout {
-    margin-left: auto;
-
     text-decoration: none;
 
     color: #dc2626;
 
     background: #fef2f2;
 
-    padding: 9px 18px;
+    padding: 9px 17px;
 
-    border-radius: 7px;
+    border-radius: 8px;
 
     font-size: 14px;
     font-weight: 600;
@@ -271,312 +177,627 @@ body {
 
 .logout:hover {
     background: #fee2e2;
+
+    color: #b91c1c;
 }
 
 
-/* ==============================
-   Main Content
-============================== */
+/* ==================================================
+   MAIN CONTENT
+================================================== */
 
 .content {
     width: 100%;
 
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 70px);
 
-    padding: 20px 40px;
+    padding: 30px 40px;
 
-    background-color: #f5f7fb;
+    background: #f5f7fb;
 }
 
 
-/* ==============================
-   Statistics Header
-============================== */
+/* ==================================================
+   DASHBOARD TITLE
+================================================== */
 
 .stats {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 30px;
-
     width: 80%;
+    min-height: 75px;
 
-    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     margin: 0 auto;
 
-    padding: 10px 20px;
+    padding: 15px 20px;
 
-    background-color: #ffffff;
+    background: #ffffff;
 
     border: 1px solid #e5e7eb;
 
-    border-radius: 7px;
+    border-radius: 12px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .stats h1 {
     font-size: 24px;
+    font-weight: 700;
 
     color: #1f2937;
 }
 
 
-/* ==============================
-   Dashboard Cards
-============================== */
+/* ==================================================
+   PROFILE SECTION
+================================================== */
 
 .users {
+    width: 100%;
+
     display: flex;
-
     justify-content: center;
+    align-items: flex-start;
 
-    align-items: center;
+    margin-top: 25px;
+}
 
-    flex-wrap: wrap;
+.user {
+    width: 100%;
+    max-width: 750px;
+
+    display: flex;
+    align-items: flex-start;
 
     gap: 20px;
 
-    width: 100%;
+    padding: 0;
 
-    margin-top: 20px;
+    background: transparent;
+
+    color: #1f2937;
+
+    border-radius: 16px;
 }
 
 
-/* ==============================
-   Individual Card
-============================== */
-
-.user {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: #ffffff;
-
-    padding: 20px;
-
-    width: 350px;
-
-    height: 100px;
-
-    background-color: #f1cf48;
-
-    border-radius: 10px;
-
-    transition: 0.2s;
-}
-
-
-/* Card Hover */
-
-.user:hover {
-    transform: translateY(-2px);
-
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-/* ==============================
-   First Card
-============================== */
-
-.user:first-child {
-    background-color: #16a34a;
-}
-
-
-/* ==============================
-   Second Card
-============================== */
-
-.user:nth-child(2) {
-    background-color: #2563eb;
-}
-
-
-/* ==============================
-   Card Icon
-============================== */
+/* ==================================================
+   PROFILE AVATAR
+================================================== */
 
 .user-logo {
+    width: 110px;
+    min-width: 110px;
+
+    height: 110px;
+
     display: flex;
-
     align-items: center;
-
     justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.20);
+
+    transition: all 0.2s ease;
 }
 
-.user svg {
-    height: 50px;
+.user-logo:hover {
+    transform: translateY(-3px);
 
-    width: 40px;
+    box-shadow:
+        0 12px 25px rgba(37, 99, 235, 0.25);
+}
 
-    margin-right: 5px;
+.user-logo svg {
+    width: 65px;
+    height: 65px;
+
+    margin: 0;
 
     fill: #ffffff;
 }
 
 
-/* ==============================
-   Card Text
-============================== */
+/* ==================================================
+   PROFILE DETAILS
+================================================== */
 
-.user h2,
-.user h1 {
+.detail {
+    flex: 1;
+
+    width: 100%;
+    max-width: 600px;
+}
+
+
+/* ==================================================
+   PROFILE CARD
+================================================== */
+
+.profile-info {
+    width: 100%;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+
+    animation: fadeIn 0.3s ease;
+}
+
+
+/* ==================================================
+   PROFILE TITLE
+================================================== */
+
+.profile-title {
+    padding-bottom: 18px;
+
+    margin-bottom: 18px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-title h2 {
     margin: 0;
-}
 
-.user h2 {
-    font-size: 25px;
-
+    font-size: 24px;
     font-weight: 700;
+
+    color: #111827;
 }
 
-.user h1 {
-    font-size: 16px;
+.profile-title p {
+    margin-top: 6px;
 
+    font-size: 14px;
+
+    color: #6b7280;
+}
+
+
+/* ==================================================
+   INFORMATION ITEM
+================================================== */
+
+.info-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    margin-bottom: 12px;
+
+    background: #f8fafc;
+
+    border: 1px solid #f1f5f9;
+
+    border-radius: 12px;
+
+    transition: all 0.2s ease;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item:hover {
+    background: #eff6ff;
+
+    border-color: #dbeafe;
+
+    transform: translateX(3px);
+}
+
+
+/* ==================================================
+   INFORMATION ICON
+================================================== */
+
+.info-icon {
+    width: 44px;
+    min-width: 44px;
+
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border-radius: 10px;
+
+    font-size: 17px;
+}
+
+.info-icon i {
+    color: #2563eb;
+}
+
+
+/* ==================================================
+   INFORMATION TEXT
+================================================== */
+
+.info-text {
+    min-width: 0;
+}
+
+.info-item span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 11px;
     font-weight: 600;
+
+    color: #6b7280;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.info-item h3 {
+    margin: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #1f2937;
+
+    word-break: break-word;
 }
 
 
-/* ==============================
-   Responsive Design
-============================== */
+/* ==================================================
+   LOADING / ERROR MESSAGE
+================================================== */
+
+.detail > p {
+    padding: 20px;
+
+    background: #ffffff;
+
+    border-radius: 12px;
+
+    color: #6b7280;
+
+    text-align: center;
+}
+
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* ==================================================
+   TABLET
+================================================== */
 
 @media (max-width: 1000px) {
 
-    .header {
+    .navbar {
         padding: 0 25px;
     }
 
+    .logo {
+        margin-right: 25px;
+    }
+
+    .nav-links {
+        gap: 4px;
+    }
+
+    .nav-links a {
+        padding: 9px 11px;
+    }
+
     .content {
-        padding: 20px 25px;
+        padding: 25px;
+    }
+
+    .stats {
+        width: 90%;
     }
 
     .user {
-        width: 300px;
+        max-width: 700px;
     }
 }
 
 
-/* ==============================
-   Tablet / Mobile
-============================== */
+/* ==================================================
+   SMALL TABLET
+================================================== */
 
-@media (max-width: 750px) {
+@media (max-width: 800px) {
 
-    /* Header */
-
-    .header {
+    .navbar {
         padding: 0 20px;
-
-        justify-content: flex-start;
     }
 
+    .logo {
+        font-size: 21px;
 
-    /* Sidebar */
-
-    .sidebar {
-        justify-content: flex-start;
-
-        padding: 10px;
-
-        overflow-x: auto;
+        margin-right: 15px;
     }
 
-    .sidebar div {
-        min-width: 150px;
-
-        justify-content: center;
+    .nav-links {
+        gap: 2px;
     }
 
+    .nav-links a {
+        font-size: 13px;
 
-    /* Content */
+        padding: 8px 9px;
+    }
+
+    .profimg p {
+        display: none;
+    }
+
+    .profile {
+        gap: 10px;
+    }
 
     .content {
         padding: 20px;
     }
 
-
-    /* Stats */
-
     .stats {
-        width: 100%;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 10px;
-
-        padding: 15px;
-    }
-
-
-    /* Cards */
-
-    .users {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 10px;
-    }
-
-    .user {
         width: 100%;
     }
 }
 
 
-/* ==============================
-   Small Mobile
-============================== */
+/* ==================================================
+   MOBILE
+================================================== */
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
 
-    .header {
-        height: 70px;
+    .navbar {
+        height: auto;
+
+        min-height: 70px;
+
+        padding: 12px 15px;
+
+        flex-wrap: wrap;
+
+        gap: 10px;
     }
 
-    .header svg {
-        height: 40px;
-        width: 40px;
+    .logo {
+        font-size: 21px;
+
+        margin-right: auto;
     }
 
-    .header p {
-        font-size: 18px;
+    .main-profile {
+        margin-left: 0;
     }
 
+    .nav-links {
+        order: 3;
 
-    .sidebar div {
-        min-width: 130px;
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 2px;
     }
 
-    .sidebar div a {
+    .nav-links a {
+        white-space: nowrap;
+
+        font-size: 13px;
+
+        padding: 9px 12px;
+    }
+
+    .content {
+        padding: 18px 15px;
+    }
+
+    .stats {
+        width: 100%;
+
+        min-height: 65px;
+    }
+
+    .stats h1 {
+        font-size: 21px;
+    }
+
+    .users {
+        margin-top: 20px;
+    }
+
+    .user {
+        flex-direction: column;
+
+        align-items: center;
+
+        gap: 15px;
+
+        max-width: 100%;
+    }
+
+    .user-logo {
+        width: 90px;
+        min-width: 90px;
+
+        height: 90px;
+
+        border-radius: 50%;
+    }
+
+    .user-logo svg {
+        width: 55px;
+        height: 55px;
+    }
+
+    .detail {
+        width: 100%;
+
+        max-width: 100%;
+    }
+
+    .profile-info {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    .profile-title h2 {
+        font-size: 21px;
+    }
+
+    .profile-title p {
+        font-size: 13px;
+    }
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 450px) {
+
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .logout {
+        padding: 8px 12px;
+
         font-size: 12px;
     }
 
-
     .content {
-        padding: 15px;
+        padding: 15px 10px;
     }
 
+    .stats {
+        min-height: 60px;
+
+        padding: 10px;
+    }
 
     .stats h1 {
-        font-size: 20px;
+        font-size: 19px;
     }
 
-
-    .user h2 {
-        font-size: 22px;
+    .profile-info {
+        padding: 16px;
     }
 
-    .user h1 {
+    .profile-title {
+        padding-bottom: 15px;
+
+        margin-bottom: 15px;
+    }
+
+    .profile-title h2 {
+        font-size: 19px;
+    }
+
+    .info-item {
+        gap: 11px;
+
+        padding: 12px;
+    }
+
+    .info-icon {
+        width: 40px;
+        min-width: 40px;
+
+        height: 40px;
+
+        font-size: 15px;
+    }
+
+    .info-item span {
+        font-size: 10px;
+    }
+
+    .info-item h3 {
         font-size: 14px;
+    }
+}
+
+
+/* ==================================================
+   VERY SMALL DEVICES
+================================================== */
+
+@media (max-width: 350px) {
+
+    .nav-links a {
+        font-size: 11px;
+
+        padding: 8px 9px;
+    }
+
+    .logout {
+        padding: 7px 9px;
+
+        font-size: 11px;
+    }
+
+    .profile-info {
+        padding: 13px;
+    }
+
+    .info-item h3 {
+        font-size: 13px;
     }
 }
