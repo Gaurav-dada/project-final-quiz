@@ -29,9 +29,23 @@ if (isset($_POST['submit'])) {
 
     try {
 
+
         // Start transaction
         $conn->begin_transaction();
 
+//validation
+    $sql = "SELECT id FROM catagories WHERE description = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $description);
+    $stmt->execute();
+
+   if ($stmt->get_result()->num_rows > 0) {
+    echo "<script>
+            alert('Category already exists');
+           
+          </script>";
+    } else {
+       
         // Insert category
         $sql = "INSERT INTO catagories 
                 (catagorie_name, description)
@@ -60,6 +74,7 @@ if (isset($_POST['submit'])) {
                 window.location.href='category.php';
               </script>";
         exit();
+    }
 
     } catch (Exception $e) {
 
@@ -88,17 +103,17 @@ if (isset($_POST['submit'])) {
     <!-- Navigation Bar -->
     <nav class="navbar">
 
-        <div class="logo">QuizMaster</div>
+       <div class="logo">QuizMaster</div>
 
         <ul class="nav-links">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#" class="active">Manage Quiz</a></li>
-            <li><a href="#">User Management</a></li>
-            <li><a href="#">Result</a></li>
-            <li><a href="#">Analysis</a></li>
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
+        
         </ul>
 
-        <a href="#" class="logout">Logout</a>
+        <a href="logout.php" class="logout">Logout</a>
 
     </nav>
 

@@ -6,6 +6,7 @@ session_start();
 
 include("../db/connection.php");
 
+
 $username = $_SESSION['username'] ?? null;
 $user_id  = $_SESSION['user_id'] ?? null;
 
@@ -189,7 +190,7 @@ while ($row = $optionsResult->fetch_assoc()) {
             type="text"
             id="correct"
             name="correct"
-            value="<?= htmlspecialchars($questionData['correct'] ?? '') ?>"
+            value="<?= htmlspecialchars($questionData['correct_answer'] ?? '') ?>"
             placeholder="Enter correct answer"
             required
         >

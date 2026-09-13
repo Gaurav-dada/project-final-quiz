@@ -5,12 +5,13 @@ include('connection.php');
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Invalid request.");
 }
-
+$question_id=$_POST['question_id'];
+$category_id=$_GET['catyid'];
 // Get form data
-$category_id = $_GET['catyid'] ?? null;
+$question = trim($_POST['question'] ?? '');
 
-$question_id = $_POST['question_id'] ?? null;
-$question    = trim($_POST['question'] ?? '');
+$question_id = (int) $question_id;
+$category_id = (int) $category_id;
 
 $opta = trim($_POST['opta'] ?? '');
 $optb = trim($_POST['optb'] ?? '');
@@ -28,8 +29,7 @@ if (!$category_id) {
     die("Category ID is missing.");
 }
 
-$question_id = (int) $question_id;
-$category_id = (int) $category_id;
+
 
 // Validate fields
 if (
@@ -152,7 +152,7 @@ try {
     // Everything successful
     $conn->commit();
 
-    header("Location: questionview.php?id=" . $category_id);
+    header("Location: ../php/questionview.php?id=" . $category_id);
     exit;
 
 } catch (Exception $e) {

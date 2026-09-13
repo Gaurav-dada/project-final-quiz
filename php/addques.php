@@ -20,11 +20,43 @@ if (isset($_POST['submit'])) {
     $opt_c       = $_POST['optc'];
     $opt_d       = $_POST['optd'];
     $correct     = $_POST['correct'];
+           // Check duplicate question in same category
+    $check = "SELECT id FROM questions 
+              WHERE catagorie_id = ? AND question = ?";
 
+    $checkStmt = $conn->prepare($check);
+    $checkStmt->bind_param("is", $category_id, $question);
+    $checkStmt->execute();
+
+    if ($checkStmt->get_result()->num_rows > 0) {
+        echo "<script>
+                alert('This question already exists in this category.');
+                history.back();
+              </script>";
+        exit;
+    }
+      
+    // Check that all options are different
+    $options = [$opt_a, $opt_b, $opt_c, $opt_d];
+
+    if (count(array_unique($options)) !== 4) {
+        echo "<script>
+                alert('All four options must be different.');
+                history.back();
+              </script>";
+        exit;
+    }
+       // Correct answer must be one of the options
+    if (!in_array($correct, $options, true)) {
+        echo "<script>
+                alert('Correct answer must match one of the options.');
+                history.back();
+              </script>";
+        exit;
+    }
     try {
-
-        $conn->begin_transaction();
-
+          $conn->begin_transaction();
+ 
         // Insert question
         $st = "INSERT INTO questions
                (catagorie_id, question, correct_answer, category_name)
@@ -137,14 +169,14 @@ $updateStmt->execute();
         <div class="logo">QuizMaster</div>
 
         <ul class="nav-links">
-            <li><a href="adminpage.php">Dashboard</a></li>
-            <li><a href="category.php" >Manage Quiz</a></li>
-            <li><a href="usermanage.php">User Management</a></li>
-            <li><a href="adminresultanalysis.php">Result and Analysis</a></li>
+            <li><a href="adminpage.php" target="">Dashboard</a></li>
+            <li><a href="category.php" target="">Manage Quiz</a></li>
+            <li><a href="usermanage.php" target="">User Management</a></li>
+            <li><a href="adminresultanalysis.php" target="">Result and Analysis</a></li>
         
         </ul>
 
-        <a href="#" class="logout">Logout</a>
+        <a href="logout.php" class="logout">Logout</a>
 
     </nav>
 
