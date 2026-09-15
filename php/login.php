@@ -16,9 +16,9 @@ if(isset($_POST['login'])){
     }
 
 
-    $st = "SELECT id, username, password FROM users WHERE username=?";
+    $st = "SELECT id,username, email, password FROM users WHERE email=? OR username=?";
     $sql = $conn->prepare($st);
-    $sql->bind_param("s", $username);
+    $sql->bind_param("ss", $username,$username);
     $sql->execute();
     $result = $sql->get_result();
 
@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
             $stm->bind_param("iis", $session_id, $_SESSION['user_id'], $activity);
             $stm->execute();
 
-             if ($users['username'] === 'admin') {
+             if ($users['email'] === 'govindaphuyal40@gmail.com' || $users['username'] === 'admin'  ) {
             header("Location: adminpage.php");
         } else {
             header("Location: studentpage.php");

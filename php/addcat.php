@@ -13,17 +13,35 @@ if (!$user_id) {
 }
 
 
-if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
 
-    $category    = trim($_POST['categoryName']);
-    $description = trim($_POST['description']);
+        $category    = trim($_POST['categoryName']);
+        $description = trim($_POST['description']);
 
-    // Basic validation
-    if (empty($category) || empty($description)) {
+        // Basic validation
+        if (empty($category) || empty($description)) {
+            echo "<script>
+                    alert('Please fill in all fields.');
+                    window.history.back();
+                </script>";
+            exit();
+        }
+        if ($category === '') {
+        die("Category name is required.");
+    }
+
+    if (!preg_match('/^[a-zA-Z0-9 ]+$/', $category)) {
         echo "<script>
-                alert('Please fill in all fields.');
+                alert('Category name can contain only letters and numbers.');
                 window.history.back();
-              </script>";
+            </script>";
+        exit();
+    }
+    if ($description === '') {
+        echo "<script>
+                alert('Description is required.');
+                window.history.back();
+            </script>";
         exit();
     }
 
