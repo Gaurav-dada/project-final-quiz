@@ -71,6 +71,7 @@ console.log(data)
         const p = document.createElement("p");
 
        h.textContent = `${element.catagorie_name} - ${element.totalques} Questions`;
+       
         p.textContent = element.description;
 
         div.appendChild(h);

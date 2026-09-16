@@ -492,7 +492,9 @@ function showques(dat){
        if(dat.data.length>0){
         ques_no.innerHTML=`Question NO ${quesno+1}/${dat.data.length}`;
         ques.innerHTML=dat.data[quesno].question;
+          console.log(currentId)
         getoption(currentId);
+      
           if (quesno >= dat.data.length - 1) {
         skip.style.display = "none";
         next.style.display = "none";

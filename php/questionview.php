@@ -142,7 +142,7 @@ $question_result = $stmt->get_result();
     echo "<td>" . htmlspecialchars($row['question']) . "</td>";
 
     // Get options for THIS question
-    $sql = "SELECT * FROM optionss WHERE question_id = ?";
+    $sql = "SELECT * FROM optionss WHERE question_id = ? AND is_active=1";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $row['id']);
     $stmt->execute();
@@ -150,6 +150,7 @@ $question_result = $stmt->get_result();
     $options_result = $stmt->get_result();
 
     while ($option = $options_result->fetch_assoc()) {
+
 
         echo "<td>" . htmlspecialchars($option['option_']) . "</td>";
     }

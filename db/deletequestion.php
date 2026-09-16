@@ -15,9 +15,9 @@ try {
 
     $question_id = (int) $question_id;
 
+   
     // Start transaction
     $conn->begin_transaction();
-
     // Soft delete question
     $stmt = $conn->prepare(
         "UPDATE questions
@@ -41,8 +41,26 @@ try {
 
     $stmt->close();
 
-    // Do NOT delete options.
-    // They may be needed for previous student attempts.
+    // soft delete options.
+     $stmt = $conn->prepare(
+        "UPDATE optionss
+         SET is_active = 0
+         WHERE question_id = ?"
+    );
+
+    if (!$stmt) {
+        throw new Exception("Failed to prepare options query");
+    }
+
+    $stmt->bind_param("i", $question_id);
+
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to deactivate options");
+    }
+
+    if ($stmt->affected_rows === 0) {
+        throw new Exception("Options not found");
+    }
 
     // Everything succeeded
     $conn->commit();

@@ -9,7 +9,7 @@ if(!$category_id){
     ]);
     exit;
 }
-$sql="SELECT option_,is_correct,question_id FROM optionss WHERE category_id=?";
+$sql="SELECT option_,is_correct,question_id FROM optionss WHERE category_id=? AND is_active=1";
 
 $st=$conn->prepare($sql);
 

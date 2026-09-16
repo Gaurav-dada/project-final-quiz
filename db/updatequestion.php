@@ -112,48 +112,50 @@ try {
     }
 
 
-    // Update options
-    $optionValues = [
-        $opta,
-        $optb,
-        $optc,
-        $optd
-    ];
+ // Update options
+$optionValues = [
+    $opta,
+    $optb,
+    $optc,
+    $optd
+];
 
-    $sql = "UPDATE optionss
-            SET option_ = ?
-            WHERE id = ? AND question_id = ?";
+$sql = "UPDATE optionss
+        SET option_ = ?, is_correct = ?
+        WHERE id = ? AND question_id = ?";
 
-    $stm = $conn->prepare($sql);
+$stm = $conn->prepare($sql);
 
-    if (!$stm) {
-        throw new Exception($conn->error);
+if (!$stm) {
+    throw new Exception($conn->error);
+}
+
+foreach ($optionIds as $i => $optionId) {
+
+    $optionValue = $optionValues[$i];
+
+    
+    $isCorrect = ($optionValue === $correct) ? 1 : 0;
+
+    $stm->bind_param(
+        "siii",
+        $optionValue,
+        $isCorrect,
+        $optionId,
+        $question_id
+    );
+
+    if (!$stm->execute()) {
+        throw new Exception($stm->error);
     }
+}
 
-    for ($i = 0; $i < 4; $i++) {
+$stm->close();
 
-        $optionId = $optionIds[$i];
-        $optionValue = $optionValues[$i];
+$conn->commit();
 
-        $stm->bind_param(
-            "sii",
-            $optionValue,
-            $optionId,
-            $question_id
-        );
-
-        if (!$stm->execute()) {
-            throw new Exception($stm->error);
-        }
-    }
-
-    $stm->close();
-
-    // Everything successful
-    $conn->commit();
-
-    header("Location: ../php/questionview.php?id=" . $category_id);
-    exit;
+header("Location: ../php/questionview.php?id=" . $category_id);
+exit;
 
 } catch (Exception $e) {
 
@@ -161,5 +163,3 @@ try {
 
     die("Update failed: " . $e->getMessage());
 }
-
-?>
