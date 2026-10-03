@@ -115,6 +115,12 @@ if (!$user_id) {
         </section>
     </main>
     <script>
+
+        function cancelbtn(){
+            window.location.reload();
+        }
+
+
         function editbtn(catlis){
         let row=catlis.closest("tr");
         let category = row.querySelector(".cat-name");
