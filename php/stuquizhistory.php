@@ -21,7 +21,7 @@ $userId = $_SESSION['user_id'];
    <!-- Navigation Bar -->
     <nav class="navbar">
 
-        <div class="logo">QuizMaster</div>
+        <a class="logo" href="studentpage.php" target="" >QuizMaster</a>
 
         <ul class="nav-links">
             <li><a href="studentpage.php" target="">Dashboard</a></li>

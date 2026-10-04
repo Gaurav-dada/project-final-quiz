@@ -30,7 +30,7 @@ if (!$user_id) {
     <!-- Navigation Bar -->
     <nav class="navbar">
 
-        <div class="logo">QuizMaster</div>
+        <a class="logo" href="adminpage.php" target="">QuizMaster</a>
 
         <ul class="nav-links">
             <li><a href="adminpage.php" target="">Dashboard</a></li>
