@@ -1,6 +1,8 @@
 <?php
 
 include('connection.php');
+include('auth.php');
+require_admin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Invalid request.");

@@ -2,6 +2,8 @@
 session_start();
 
 include("../db/connection.php");
+include("../db/auth.php");
+require_admin(false);
 
 $username = $_SESSION['username'] ?? null;
 $user_id  = $_SESSION['user_id'] ?? null;

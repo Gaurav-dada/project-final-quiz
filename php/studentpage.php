@@ -65,6 +65,12 @@ $userId = $_SESSION['user_id'];
 const userId = <?php echo (int)$userId; ?>;
 const detail = document.querySelector(".detail");
 
+function esc(text){
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 async function getUser() {
     try {
         const res = await fetch('../db/user_data.php');
@@ -96,7 +102,7 @@ async function getUser() {
                     </div>
                     <div>
                         <span>Full Name</span>
-                        <h3>${user.fullname}</h3>
+                        <h3>${esc(user.fullname)}</h3>
                     </div>
                 </div>
 
@@ -106,7 +112,7 @@ async function getUser() {
                     </div>
                     <div>
                         <span>Email Address</span>
-                        <h3>${user.email}</h3>
+                        <h3>${esc(user.email)}</h3>
                     </div>
                 </div>
 
@@ -116,7 +122,7 @@ async function getUser() {
                     </div>
                     <div>
                         <span>Username</span>
-                        <h3>${user.username}</h3>
+                        <h3>${esc(user.username)}</h3>
                     </div>
                 </div>
 

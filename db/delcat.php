@@ -1,5 +1,7 @@
 <?php
 include('connection.php');
+include('auth.php');
+require_admin();
 $category_id = $_GET['id'];
  try {
 

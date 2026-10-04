@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("auth.php");
+require_login();
 header('Content-Type:application/json');
 $userid=$_SESSION['user_id'];
 $catid=$_GET['catid'];

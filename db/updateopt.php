@@ -1,6 +1,8 @@
 <?php
 
 include('connection.php');
+include('auth.php');
+require_admin();
 
 $question_id = $_GET['id'] ?? null;
 

@@ -1,5 +1,7 @@
 <?php
 include("../db/connection.php");
+include("../db/auth.php");
+require_admin();
 header('Content-Type:application/json');
 $userid=$_GET['userid'];
 $catid=$_GET['catid'];

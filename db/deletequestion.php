@@ -1,6 +1,8 @@
 <?php
 
 include('connection.php');
+include('auth.php');
+require_admin();
 
 header('Content-Type: application/json');
 

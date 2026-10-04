@@ -1,5 +1,7 @@
 <?php
 include("connection.php");
+include("auth.php");
+require_admin();
 
 header('Content-Type: application/json');
 
@@ -19,7 +21,7 @@ $success = true;
 
 
 
-  $st = "UPDATE users SET is_active =0 WHERE id = ?";
+  $st = "UPDATE users SET is_active =0 WHERE id = ? AND role <> 'admin'";
     $stm = $conn->prepare($st);
 
     if (!$stm) {
@@ -31,6 +33,10 @@ $success = true;
     if (!$stm->execute()) {
         $success = false; 
          echo $stm->error;  
+    }
+
+    if ($stm->affected_rows === 0) {
+        $success = false;
     }
 
     $stm->close();

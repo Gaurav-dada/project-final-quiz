@@ -2,6 +2,8 @@
 
 session_start();
 include('../db/connection.php');
+include('../db/auth.php');
+require_admin(false);
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../php/login.php");
     exit();
@@ -117,6 +119,12 @@ async function getTotalUsers() {
 // ==============================
 // Load Users
 // ==============================
+function esc(text){
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 async function user_data() {
 
     try {
@@ -136,9 +144,9 @@ async function user_data() {
             userdata.innerHTML += `
                 <tr>
                     <td>${element.id}</td>
-                    <td>${element.fullname}</td>
-                    <td>${element.email}</td>
-                    <td>${element.username}</td>
+                    <td>${esc(element.fullname)}</td>
+                    <td>${esc(element.email)}</td>
+                    <td>${esc(element.username)}</td>
 
                     <td>
                         <button onclick="editUser(${element.id})">

@@ -255,18 +255,19 @@ CREATE TABLE `users` (
   `email` varchar(150) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `is_active` tinyint(1) DEFAULT 1
+  `is_active` tinyint(1) DEFAULT 1,
+  `role` varchar(20) NOT NULL DEFAULT 'student'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `is_active`) VALUES
-(1, 'admin', 'govindaphuyal40@gmail.com', 'admin', '$2y$10$JGn21MPaDS0zQlc7d9eyje57zfOlNC.rKDblFBDo2HjXEZgDTDpai', 1),
-(2, 'gaurav', 'phuyalgaurab123@gmail.com', 'gaurav', '$2y$10$1vMhiZXau85.XCFqFeVGi.IXnCIvrHLh2eEpKya/YKLRuvpKdY/fi', 1),
-(3, 'ganga', 'gangaphuyal333@gmail.com', 'ganga', '$2y$10$8liYZfZBMcxoUfmA749UwOcQGJoFdaNUZSsm5tCIHKHRxiuV.c.Hm', 0),
-(4, 'Gaurav Phuyal', 'gangaphuyal33@gmail.com', 'Gaurav Phuyal', '$2y$10$5.ojSDCc3bCdvRZqOjzT6uHQ9wwiYOFGH6KjmaG..8JRwSH/bo1pG', 1);
+INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `is_active`, `role`) VALUES
+(1, 'admin', 'govindaphuyal40@gmail.com', 'admin', '$2y$10$JGn21MPaDS0zQlc7d9eyje57zfOlNC.rKDblFBDo2HjXEZgDTDpai', 1, 'admin'),
+(2, 'gaurav', 'phuyalgaurab123@gmail.com', 'gaurav', '$2y$10$1vMhiZXau85.XCFqFeVGi.IXnCIvrHLh2eEpKya/YKLRuvpKdY/fi', 1, 'student'),
+(3, 'ganga', 'gangaphuyal333@gmail.com', 'ganga', '$2y$10$8liYZfZBMcxoUfmA749UwOcQGJoFdaNUZSsm5tCIHKHRxiuV.c.Hm', 0, 'student'),
+(4, 'Gaurav Phuyal', 'gangaphuyal33@gmail.com', 'Gaurav Phuyal', '$2y$10$5.ojSDCc3bCdvRZqOjzT6uHQ9wwiYOFGH6KjmaG..8JRwSH/bo1pG', 1, 'student');
 
 -- --------------------------------------------------------
 

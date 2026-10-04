@@ -1,5 +1,7 @@
 <?php
 include("connection.php");
+include("auth.php");
+require_login();
 
 header('Content-Type: application/json');
 

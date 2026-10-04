@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("auth.php");
+require_login();
 header('Content-Type:application/json');
 $category_id=$_GET['num'];
 if (!isset($_SESSION['user_id'])) {

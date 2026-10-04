@@ -1,6 +1,8 @@
 <?php
 
 include("../db/connection.php");
+include("../db/auth.php");
+require_login();
 
 header('Content-Type: application/json');
 
@@ -23,6 +25,7 @@ try {
         SELECT *
         FROM user_answer
         WHERE attempt_id = ?
+        AND user_id = ?
     ";
 
     $stmt = $conn->prepare($sql);
@@ -31,7 +34,7 @@ try {
         throw new Exception("Failed to prepare answer query");
     }
 
-    $stmt->bind_param("i", $attempt_id);
+    $stmt->bind_param("ii", $attempt_id, $_SESSION['user_id']);
 
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute answer query");
@@ -56,6 +59,7 @@ try {
         SELECT score, total_questions
         FROM quiz_result
         WHERE attempt_id = ?
+        AND user_id = ?
         LIMIT 1
     ";
 
@@ -65,7 +69,7 @@ try {
         throw new Exception("Failed to prepare quiz result query");
     }
 
-    $stmt->bind_param("i", $attempt_id);
+    $stmt->bind_param("ii", $attempt_id, $_SESSION['user_id']);
 
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute quiz result query");

@@ -395,6 +395,7 @@ let ques_next=null;
 let quesno=0;
 let answered=false;
 const savedSkip=new Set();
+let pendingAnswer=null;
 
 
 
@@ -492,7 +493,7 @@ function showques(dat){
         ques_next=dat;
        if(dat.data.length>0){
         ques_no.innerHTML=`Question NO ${quesno+1}/${dat.data.length}`;
-        ques.innerHTML=dat.data[quesno].question;
+        ques.textContent=dat.data[quesno].question;
           console.log(currentId)
         getoption(currentId);
       
@@ -565,15 +566,20 @@ function showoption(data) {
                     });
                     const result = await res.json();
                     console.log(result) ;  
-                }
-                    submitAnswer();
-                    if (element.is_correct == 1) {
+                    if (!result.success) {
+                        answered = false;
+                        alert(result.message);
+                        return;
+                    }
+                    if (result.is_correct == 1) {
                         li.style.background = "green";
                         count++;
                         score.textContent = count;
                     } else {
                         li.style.background = "red";
                     }
+                }
+                    pendingAnswer = submitAnswer();
                 });
 
                 list.appendChild(li);
@@ -649,6 +655,11 @@ async function submitQuiz() {
     // Stop timer
     stopTimer();
 
+    // Wait for the last answer to be saved
+    if (pendingAnswer) {
+        await pendingAnswer;
+    }
+
     // Store unanswered questions as skipped
     let first = answered ? quesno + 1 : quesno;
     for (let i = first; i < ques_next.data.length; i++) {
@@ -679,7 +690,7 @@ async function submitQuiz() {
             container.innerHTML = `
                 <div class="quiz-result">
                     <h2>Quiz Completed!</h2>
-                    <h3>Score: ${count}/${ques_next.data.length}</h3>
+                    <h3>Score: ${result.score}/${ques_next.data.length}</h3>
                      <a href="quizcat.php" class="category-link">
                         Go to Categories
                     </a>

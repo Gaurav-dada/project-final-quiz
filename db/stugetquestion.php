@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("connection.php");
+include("auth.php");
+require_admin();
 
 header('Content-Type: application/json');
 if(!isset($_SESSION['user_id'])){

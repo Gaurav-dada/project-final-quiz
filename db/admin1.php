@@ -1,5 +1,7 @@
 <?php
 include("connection.php");
+include("auth.php");
+require_admin();
 
 header('Content-Type: application/json');
 
@@ -16,7 +18,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // Get user IDs
-$stmt = $conn->prepare("SELECT id FROM users WHERE is_active=1 AND username <> 'admin'");
+$stmt = $conn->prepare("SELECT id FROM users WHERE is_active=1 AND role <> 'admin'");
 $stmt->execute();
 $result = $stmt->get_result();
 

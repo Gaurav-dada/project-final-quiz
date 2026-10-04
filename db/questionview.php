@@ -1,5 +1,7 @@
 <?php
 include('connection.php');
+include('auth.php');
+require_admin(false);
 
 // Get category ID from URL
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {

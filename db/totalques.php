@@ -1,5 +1,7 @@
 <?php
 include("connection.php");
+include("auth.php");
+require_login();
 
 header('Content-Type: application/json');
 
@@ -13,7 +15,7 @@ if (!$category_id) {
     exit;
 }
 
-$sql = "SELECT id,question, correct_answer FROM questions WHERE catagorie_id = ? ";
+$sql = "SELECT id FROM questions WHERE catagorie_id = ? ";
 
 $stmt = $conn->prepare($sql);
 

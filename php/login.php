@@ -1,4 +1,8 @@
 <?php
+session_set_cookie_params([
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
 session_start();
 include("../db/connection.php");
 
@@ -16,7 +20,7 @@ if(isset($_POST['login'])){
     }
 
 
-    $st = "SELECT id,username, email, password FROM users WHERE email=? OR username=?";
+    $st = "SELECT id,username, email, password, role FROM users WHERE (email=? OR username=?) AND is_active=1";
     $sql = $conn->prepare($st);
     $sql->bind_param("ss", $username,$username);
     $sql->execute();
@@ -27,6 +31,8 @@ if(isset($_POST['login'])){
         $users = $result->fetch_assoc();
 
         if(password_verify($password, $users['password'])){
+
+            session_regenerate_id(true);
 
             $_SESSION['user_id'] = $users['id'];
             $_SESSION['username'] = $users['username'];
@@ -40,7 +46,7 @@ if(isset($_POST['login'])){
             $stm->bind_param("iis", $session_id, $_SESSION['user_id'], $activity);
             $stm->execute();
 
-             if ($users['email'] === 'govindaphuyal40@gmail.com' || $users['username'] === 'admin'  ) {
+             if ($users['role'] === 'admin') {
             header("Location: adminpage.php");
         } else {
             header("Location: studentpage.php");

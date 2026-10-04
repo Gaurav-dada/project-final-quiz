@@ -1,18 +1,24 @@
 <?php
 session_start();
 include("connection.php");
+include("auth.php");
 header('Content-Type:application/json');
+require_login();
 $data=json_decode(file_get_contents("php://input"),true);
-$user_id = $_SESSION['user_id'] ?? null;
+$user_id = $_SESSION['user_id'];
+$category_id=(int)($data['category_id'] ?? 0);
 
-if (!$user_id) {
+$st="SELECT id FROM catagories WHERE id=? AND is_active=1";
+$stm=$conn->prepare($st);
+$stm->bind_param("i",$category_id);
+$stm->execute();
+if($stm->get_result()->num_rows===0){
     echo json_encode([
-        "success" => false,
-        "message" => "User not logged in"
+        "success"=>false,
+        "message"=>"Category not found"
     ]);
     exit;
 }
-$category_id=$data['category_id'];
 
 $st="SELECT MAX(attempt_id) AS attempt_no FROM quiz_attempts WHERE user_id=? AND category_id=?";
 $stm=$conn->prepare($st);
@@ -36,4 +42,3 @@ echo json_encode([
     "success"=>true,
     "attemptid"=>$attempt_no
 ]);
-
