@@ -148,16 +148,15 @@ async function showcategory(id) {
 
         console.log(data);
 
-        // Remove duplicate categories
-        const arr = [
-            ...new Map(
-                data.data.map(item => [
-                    item.catagorie_id,
-                    item
-                ])
-            ).values()
-        ];
-
+    
+       const arr = [
+    ...new Map(
+        data.data.map(item => [
+            item.id,
+            item
+        ])
+    ).values()
+];
         console.log(arr);
 
         // Clear select

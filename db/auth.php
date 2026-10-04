@@ -1,7 +1,6 @@
 <?php
 
-// Shared access checks
-// include after connection.php, then call require_login() or require_admin()
+
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
