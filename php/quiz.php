@@ -394,6 +394,7 @@ let next_option=null;
 let ques_next=null;
 let quesno=0;
 let answered=false;
+const savedSkip=new Set();
 
 
 
@@ -602,8 +603,35 @@ function next_ques(){
 }
 
 
+//store skipped question in database
+async function storeSkipped(index){
+    const question_id = ques_next.data[index].id;
+    if(savedSkip.has(question_id)) return;
+    savedSkip.add(question_id);
+    try{
+        const res = await fetch("../db/check_answer.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question_id,
+                answer:"",
+                category_id:currentId,
+                attempt_id
+            })
+        });
+        const result = await res.json();
+        console.log(result);
+    }
+    catch(error){
+        console.error("Error",error);
+    }
+}
+
 //skip  question
-function skip_tonext(){
+async function skip_tonext(){
+    await storeSkipped(quesno);
     answered=false;
     quesno++;
     if(quesno>=ques_next.data.length){
@@ -620,6 +648,12 @@ async function submitQuiz() {
 
     // Stop timer
     stopTimer();
+
+    // Store unanswered questions as skipped
+    let first = answered ? quesno + 1 : quesno;
+    for (let i = first; i < ques_next.data.length; i++) {
+        await storeSkipped(i);
+    }
 
     try {
 

@@ -16,7 +16,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // Get user IDs
-$stmt = $conn->prepare("SELECT id FROM users WHERE is_active=1");
+$stmt = $conn->prepare("SELECT id FROM users WHERE is_active=1 AND username <> 'admin'");
 $stmt->execute();
 $result = $stmt->get_result();
 

@@ -212,7 +212,9 @@ let cor=0;
 
         const answers = data.data || [];
 
-        const attempted = answers.length;
+        const attempted = answers.filter(
+            element => element.answer !== "" && element.answer !== null
+        ).length;
 
         totalAttempted.textContent =
             `Attempted Questions: ${attempted}`;
@@ -237,7 +239,8 @@ let cor=0;
         // ==========================================
 
         const wrongArr = answers.filter(
-            element => Number(element.is_correct) === 0
+            element => Number(element.is_correct) === 0 &&
+            element.answer !== "" && element.answer !== null
         );
 
         const wrong = wrongArr.length;
@@ -348,6 +351,16 @@ async function performance(cat_id, att_id) {
 
 
             if (
+                userAnswer.answer === "" ||
+                userAnswer.answer === null
+            ) {
+
+                item.classList.add("wrong");
+
+                span.textContent =
+                    `Skipped | Correct Answer: ${question.correct_answer}`;
+
+            } else if (
                 userAnswer.answer ===
                 question.correct_answer
             ) {

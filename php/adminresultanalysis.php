@@ -308,7 +308,9 @@ console.log("TOTAL QUESTIONS:", data.total_questions);
 
         const answered = data.data || [];
 
-        const attempted = answered.length;
+        const attempted = answered.filter(
+            element => element.answer !== "" && element.answer !== null
+        ).length;
 
         totalAttempted.textContent =
             `Attempted Questions: ${attempted}`;
@@ -333,7 +335,8 @@ console.log("TOTAL QUESTIONS:", data.total_questions);
         // =========================
 
         const wrongArr = answered.filter(
-            element => Number(element.is_correct) === 0
+            element => Number(element.is_correct) === 0 &&
+            element.answer !== "" && element.answer !== null
         );
 
         const wrong = wrongArr.length;
@@ -403,7 +406,11 @@ for (let i = 0; i < questionnum.length; i++) {
 
         p.textContent = `Q${i + 1}: ${answers[i].question}`;
 
-        if (questionnum[i].answer === answers[i].correct_answer) {
+        if (questionnum[i].answer === "" || questionnum[i].answer === null) {
+            item.classList.add("wrong");
+            span.textContent =
+                `Skipped | Correct Answer: ${answers[i].correct_answer}`;
+        } else if (questionnum[i].answer === answers[i].correct_answer) {
             item.classList.add("correct");
             span.textContent = `Correct ✔ ${questionnum[i].answer}`;
         } else {
