@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2026 at 04:52 AM
+-- Generation Time: Oct 04, 2026 at 02:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,6 +31,7 @@ CREATE TABLE `catagories` (
   `id` int(11) NOT NULL,
   `catagorie_name` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
+  `totalques` int(11) NOT NULL DEFAULT 0,
   `is_active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,9 +39,14 @@ CREATE TABLE `catagories` (
 -- Dumping data for table `catagories`
 --
 
-INSERT INTO `catagories` (`id`, `catagorie_name`, `description`, `is_active`) VALUES
-(3, 'English', 'Grammar and Verbs', 1),
-(5, 'Math', 'Algebra and Derivatives', 0);
+INSERT INTO `catagories` (`id`, `catagorie_name`, `description`, `totalques`, `is_active`) VALUES
+(3, 'English', 'Grammar and Verbs', 4, 1),
+(5, 'Math', 'Algebra and Derivatives', 0, 0),
+(6, 'English', 'VERBS', 0, 0),
+(7, 'English', 'Conjunction', 0, 1),
+(8, 'Nepali', 'Grammar', 0, 1),
+(9, 'Science', 'Biology', 0, 1),
+(10, 'Math', 'Statistics', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -54,38 +60,55 @@ CREATE TABLE `optionss` (
   `category_name` varchar(255) DEFAULT NULL,
   `option_` varchar(255) DEFAULT NULL,
   `is_correct` tinyint(1) NOT NULL DEFAULT 0,
-  `question_id` int(11) NOT NULL
+  `question_id` int(11) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `optionss`
 --
 
-INSERT INTO `optionss` (`id`, `category_id`, `category_name`, `option_`, `is_correct`, `question_id`) VALUES
-(1, 3, 'English', 'am', 1, 12),
-(2, 3, 'English', 'tiny', 0, 12),
-(3, 3, 'English', 'is', 0, 12),
-(4, 3, 'English', 'scrutinized', 0, 12),
-(5, 3, 'English', 'am', 1, 13),
-(6, 3, 'English', 'tiny', 0, 13),
-(7, 3, 'English', 'is', 0, 13),
-(8, 3, 'English', 'scrutinized', 0, 13),
-(9, 3, 'English', 'am', 1, 14),
-(10, 3, 'English', 'tiny', 0, 14),
-(11, 3, 'English', 'is', 0, 14),
-(12, 3, 'English', 'scrutinized', 0, 14),
-(13, 3, 'English', 'am', 1, 15),
-(14, 3, 'English', 'tiny', 0, 15),
-(15, 3, 'English', 'is', 0, 15),
-(16, 3, 'English', 'scrutinized', 0, 15),
-(17, 3, 'English', 'is', 1, 16),
-(18, 3, 'English', 'am', 0, 16),
-(19, 3, 'English', 'her', 0, 16),
-(20, 3, 'English', 'bd', 0, 16),
-(21, 3, 'English', 'is', 1, 17),
-(22, 3, 'English', 'am', 0, 17),
-(23, 3, 'English', 'her', 0, 17),
-(24, 3, 'English', 'bd', 0, 17);
+INSERT INTO `optionss` (`id`, `category_id`, `category_name`, `option_`, `is_correct`, `question_id`, `is_active`) VALUES
+(1, 3, 'English', 'am', 1, 12, 0),
+(2, 3, 'English', 'tiny', 0, 12, 0),
+(3, 3, 'English', 'is', 0, 12, 0),
+(4, 3, 'English', 'scrutinized', 0, 12, 0),
+(5, 3, 'English', 'am', 1, 13, 0),
+(6, 3, 'English', 'tiny', 0, 13, 0),
+(7, 3, 'English', 'is', 0, 13, 0),
+(8, 3, 'English', 'scrutinized', 0, 13, 0),
+(9, 3, 'English', 'am', 1, 14, 0),
+(10, 3, 'English', 'tiny', 0, 14, 0),
+(11, 3, 'English', 'is', 0, 14, 0),
+(12, 3, 'English', 'scrutinized', 0, 14, 0),
+(13, 3, 'English', 'am', 1, 15, 0),
+(14, 3, 'English', 'tiny', 0, 15, 0),
+(15, 3, 'English', 'is', 0, 15, 0),
+(16, 3, 'English', 'scrutinized', 0, 15, 0),
+(17, 3, 'English', 'is', 1, 16, 1),
+(18, 3, 'English', 'am', 0, 16, 1),
+(19, 3, 'English', 'her', 0, 16, 1),
+(20, 3, 'English', 'bd', 0, 16, 1),
+(21, 3, 'English', 'is', 1, 17, 0),
+(22, 3, 'English', 'am', 0, 17, 0),
+(23, 3, 'English', 'her', 0, 17, 0),
+(24, 3, 'English', 'bd', 0, 17, 0),
+(25, 3, 'English', 'is', 0, 18, 1),
+(26, 3, 'English', 'am', 1, 18, 1),
+(27, 3, 'English', 'her', 0, 18, 1),
+(28, 3, 'English', 'bd', 0, 18, 1),
+(29, 3, 'English', 'is', 0, 19, 1),
+(30, 3, 'English', 'am', 1, 19, 1),
+(31, 3, 'English', 'her', 0, 19, 1),
+(32, 3, 'English', 'bd', 0, 19, 1),
+(33, 3, 'English', 'is', 1, 20, 0),
+(34, 3, 'English', 'am', 0, 20, 0),
+(35, 3, 'English', 'her', 0, 20, 0),
+(36, 3, 'English', 'bd', 0, 20, 0),
+(37, 3, 'English', 'is', 0, 21, 1),
+(38, 3, 'English', 'am', 1, 21, 1),
+(39, 3, 'English', 'her', 0, 21, 1),
+(40, 3, 'English', 'bd', 0, 21, 1);
 
 -- --------------------------------------------------------
 
@@ -111,8 +134,12 @@ INSERT INTO `questions` (`id`, `category_name`, `catagorie_id`, `question`, `cor
 (13, 'English', 3, 'I ____ Hari', 'am', 0),
 (14, 'English', 3, 'I ____ Hari', 'am', 0),
 (15, 'English', 3, 'I ____ Hari', 'am', 0),
-(16, 'English', 3, 'who ____ don', 'is', 0),
-(17, 'English', 3, 'I ____ Gaurav', 'is', 0);
+(16, 'English', 3, 'who ____ don', 'is', 1),
+(17, 'English', 3, 'I ____ Gaurav', 'is', 0),
+(18, 'English', 3, 'I ____ Gaurav', 'am', 1),
+(19, 'English', 3, 'I ____ Hari', 'am', 1),
+(20, 'English', 3, 'I ____ Hari', 'is', 0),
+(21, 'English', 3, 'I ____ DON', 'am', 1);
 
 -- --------------------------------------------------------
 
@@ -141,7 +168,42 @@ INSERT INTO `quiz_attempts` (`id`, `user_id`, `category_id`, `attempt_id`, `scor
 (6, 2, 3, 6, 0),
 (7, 2, 3, 7, 0),
 (8, 2, 3, 8, 0),
-(9, 2, 5, 1, 0);
+(9, 2, 5, 1, 0),
+(10, 3, 3, 1, 0),
+(11, 2, 3, 9, 0),
+(12, 2, 3, 10, 0),
+(13, 1, 3, 1, 0),
+(14, 2, 3, 11, 0),
+(15, 1, 3, 2, 0),
+(16, 1, 3, 3, 0),
+(17, 1, 3, 4, 0),
+(18, 2, 3, 12, 0),
+(19, 2, 3, 13, 0),
+(20, 2, 3, 14, 0),
+(21, 2, 3, 15, 0),
+(22, 2, 3, 16, 0),
+(23, 2, 3, 17, 0),
+(24, 2, 3, 18, 0),
+(25, 2, 3, 19, 0),
+(26, 2, 3, 20, 0),
+(27, 2, 3, 21, 0),
+(28, 2, 3, 22, 0),
+(29, 2, 3, 23, 0),
+(30, 2, 3, 24, 0),
+(31, 2, 3, 25, 0),
+(32, 2, 3, 26, 0),
+(33, 2, 3, 27, 0),
+(34, 2, 3, 28, 0),
+(35, 2, 3, 29, 0),
+(36, 1, 3, 5, 0),
+(37, 1, 3, 6, 0),
+(38, 1, 3, 7, 0),
+(39, 1, 3, 8, 0),
+(40, 1, 3, 9, 0),
+(41, 1, 3, 10, 0),
+(42, 1, 3, 11, 0),
+(43, 1, 3, 12, 0),
+(44, 1, 3, 13, 0);
 
 -- --------------------------------------------------------
 
@@ -163,11 +225,23 @@ CREATE TABLE `quiz_result` (
 --
 
 INSERT INTO `quiz_result` (`id`, `user_id`, `attempt_id`, `category_id`, `score`, `total_questions`) VALUES
-(1, 2, 1, 3, 1, 2),
-(2, 2, 2, 3, 1, 2),
-(3, 2, 3, 3, 2, 2),
-(4, 2, 5, 3, 1, 1),
-(5, 2, 6, 3, 1, 2);
+(1, 2, 21, 3, 2, 3),
+(2, 2, 22, 3, 0, 3),
+(3, 2, 23, 3, 0, 3),
+(4, 2, 24, 3, 2, 3),
+(5, 2, 26, 3, 1, 3),
+(6, 2, 27, 3, 1, 3),
+(7, 2, 28, 3, 1, 3),
+(8, 2, 29, 3, 1, 3),
+(9, 1, 5, 3, 2, 4),
+(10, 1, 6, 3, 2, 4),
+(11, 1, 7, 3, 2, 4),
+(12, 1, 8, 3, 3, 4),
+(13, 1, 9, 3, 2, 4),
+(14, 1, 10, 3, 2, 4),
+(15, 1, 11, 3, 0, 4),
+(16, 1, 12, 3, 1, 4),
+(17, 1, 13, 3, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -190,7 +264,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `fullname`, `email`, `username`, `password`, `is_active`) VALUES
 (1, 'admin', 'govindaphuyal40@gmail.com', 'admin', '$2y$10$JGn21MPaDS0zQlc7d9eyje57zfOlNC.rKDblFBDo2HjXEZgDTDpai', 1),
-(2, 'gaurav', 'phuyalgaurab123@gmail.com', 'gaurav', '$2y$10$1vMhiZXau85.XCFqFeVGi.IXnCIvrHLh2eEpKya/YKLRuvpKdY/fi', 1);
+(2, 'gaurav', 'phuyalgaurab123@gmail.com', 'gaurav', '$2y$10$1vMhiZXau85.XCFqFeVGi.IXnCIvrHLh2eEpKya/YKLRuvpKdY/fi', 1),
+(3, 'ganga', 'gangaphuyal333@gmail.com', 'ganga', '$2y$10$8liYZfZBMcxoUfmA749UwOcQGJoFdaNUZSsm5tCIHKHRxiuV.c.Hm', 0),
+(4, 'Gaurav Phuyal', 'gangaphuyal33@gmail.com', 'Gaurav Phuyal', '$2y$10$5.ojSDCc3bCdvRZqOjzT6uHQ9wwiYOFGH6KjmaG..8JRwSH/bo1pG', 1);
 
 -- --------------------------------------------------------
 
@@ -244,7 +320,53 @@ INSERT INTO `user_activity` (`id`, `session_id`, `user_id`, `activity`) VALUES
 (32, '0', 2, 'login'),
 (33, '0', 1, 'login'),
 (34, '0', 2, 'login'),
-(35, '3', 1, 'login');
+(35, '3', 1, 'login'),
+(36, '3', 3, 'login'),
+(37, '0', 2, 'login'),
+(38, '0', 1, 'login'),
+(39, '0', 4, 'login'),
+(40, '0', 4, 'logout'),
+(41, '0', 1, 'login'),
+(42, '0', 1, 'logout'),
+(43, '0', 2, 'login'),
+(44, '0', 1, 'login'),
+(45, '0', 2, 'login'),
+(46, '0', 1, 'login'),
+(47, '0', 2, 'login'),
+(48, '1', 2, 'login'),
+(49, '1', 2, 'logout'),
+(50, '1', 1, 'login'),
+(51, '1', 1, 'logout'),
+(52, '1', 1, 'login'),
+(53, '1', 1, 'logout'),
+(54, '1', 1, 'login'),
+(55, '1', 1, 'login'),
+(56, '1', 1, 'logout'),
+(57, '1', 2, 'login'),
+(58, '1', 2, 'logout'),
+(59, '1', 1, 'login'),
+(60, '1', 1, 'login'),
+(61, '1', 1, 'login'),
+(62, '1', 1, 'login'),
+(63, '1', 1, 'logout'),
+(64, '1', 1, 'login'),
+(65, '0', 2, 'login'),
+(66, '0', 2, 'login'),
+(67, '0', 1, 'login'),
+(68, '0', 2, 'login'),
+(69, '0', 2, 'logout'),
+(70, '0', 1, 'login'),
+(71, '0', 1, 'login'),
+(72, '0', 1, 'logout'),
+(73, '0', 2, 'login'),
+(74, '0', 1, 'login'),
+(75, '0', 1, 'logout'),
+(76, '0', 2, 'login'),
+(77, '0', 1, 'login'),
+(78, '0', 1, 'login'),
+(79, '0', 1, 'logout'),
+(80, '0', 2, 'login'),
+(81, '0', 2, 'logout');
 
 -- --------------------------------------------------------
 
@@ -267,15 +389,58 @@ CREATE TABLE `user_answer` (
 --
 
 INSERT INTO `user_answer` (`id`, `user_id`, `attempt_id`, `category_id`, `question_id`, `answer`, `is_correct`) VALUES
-(1, 2, 1, 3, 12, 'am', 1),
-(2, 2, 1, 3, 13, 'scrutinized', 0),
-(3, 2, 2, 3, 12, 'am', 1),
-(4, 2, 2, 3, 13, 'scrutinized', 0),
-(5, 2, 3, 3, 12, 'am', 1),
-(6, 2, 3, 3, 13, 'am', 1),
-(7, 2, 5, 3, 12, 'am', 1),
-(8, 2, 6, 3, 15, 'am', 1),
-(9, 2, 6, 3, 17, 'am', 0);
+(1, 2, 21, 3, 18, 'is', 0),
+(2, 2, 21, 3, 19, 'her', 0),
+(3, 2, 21, 3, 21, 'am', 1),
+(4, 2, 22, 3, 18, 'am', 1),
+(5, 2, 22, 3, 19, 'am', 1),
+(6, 2, 22, 3, 21, 'is', 0),
+(7, 2, 23, 3, 18, 'am', 1),
+(8, 2, 24, 3, 18, 'is', 0),
+(9, 2, 24, 3, 19, 'am', 1),
+(10, 2, 24, 3, 21, 'am', 1),
+(11, 2, 26, 3, 18, 'bd', 0),
+(12, 2, 26, 3, 19, 'am', 1),
+(13, 2, 26, 3, 21, 'am', 1),
+(14, 2, 27, 3, 18, 'am', 1),
+(15, 2, 27, 3, 19, 'am', 1),
+(16, 2, 27, 3, 21, 'am', 1),
+(17, 2, 28, 3, 18, 'am', 1),
+(18, 2, 28, 3, 19, 'am', 1),
+(19, 2, 28, 3, 21, 'am', 1),
+(20, 2, 29, 3, 18, 'am', 1),
+(21, 2, 29, 3, 19, 'am', 1),
+(22, 2, 29, 3, 21, 'am', 1),
+(23, 1, 5, 3, 16, 'is', 1),
+(24, 1, 5, 3, 18, 'am', 1),
+(25, 1, 5, 3, 19, 'am', 1),
+(26, 1, 5, 3, 21, 'am', 1),
+(27, 1, 6, 3, 16, 'is', 1),
+(28, 1, 6, 3, 18, 'am', 1),
+(29, 1, 6, 3, 19, 'am', 1),
+(30, 1, 6, 3, 21, 'am', 1),
+(31, 1, 7, 3, 16, 'is', 1),
+(32, 1, 7, 3, 18, 'is', 0),
+(33, 1, 8, 3, 16, 'is', 1),
+(34, 1, 8, 3, 18, 'am', 1),
+(35, 1, 8, 3, 19, 'is', 0),
+(36, 1, 8, 3, 21, 'am', 1),
+(37, 1, 9, 3, 16, 'is', 1),
+(38, 1, 9, 3, 18, 'am', 0),
+(39, 1, 9, 3, 19, 'am', 1),
+(40, 1, 9, 3, 21, 'am', 1),
+(41, 1, 10, 3, 16, 'is', 1),
+(42, 1, 10, 3, 18, 'am', 1),
+(43, 1, 10, 3, 19, 'am', 1),
+(44, 1, 10, 3, 21, 'am', 1),
+(45, 1, 12, 3, 16, 'is', 1),
+(46, 1, 12, 3, 18, 'is', 1),
+(47, 1, 12, 3, 19, 'is', 1),
+(48, 1, 12, 3, 21, 'is', 1),
+(49, 1, 13, 3, 16, 'is', 1),
+(50, 1, 13, 3, 18, 'am', 1),
+(51, 1, 13, 3, 19, 'am', 1),
+(52, 1, 13, 3, 21, 'am', 1);
 
 --
 -- Indexes for dumped tables
@@ -347,49 +512,49 @@ ALTER TABLE `user_answer`
 -- AUTO_INCREMENT for table `catagories`
 --
 ALTER TABLE `catagories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `optionss`
 --
 ALTER TABLE `optionss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `quiz_attempts`
 --
 ALTER TABLE `quiz_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `quiz_result`
 --
 ALTER TABLE `quiz_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `user_answer`
 --
 ALTER TABLE `user_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Constraints for dumped tables
