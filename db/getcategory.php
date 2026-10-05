@@ -5,7 +5,9 @@ require_login();
 
 header('Content-Type: application/json');
 
-$st = "SELECT id, catagorie_name ,totalques,description FROM catagories WHERE is_active=1";
+$st = "SELECT c.id, c.catagorie_name, c.description,
+        (SELECT COUNT(*) FROM questions q WHERE q.catagorie_id = c.id AND q.is_active = 1) AS totalques
+        FROM catagories c WHERE c.is_active = 1";
 $stm = $conn->prepare($st);
 
 if (!$stm) {

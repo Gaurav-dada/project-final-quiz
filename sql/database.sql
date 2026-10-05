@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 04, 2026 at 02:34 PM
+-- Generation Time: Oct 05, 2026 at 05:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,10 +40,10 @@ CREATE TABLE `catagories` (
 --
 
 INSERT INTO `catagories` (`id`, `catagorie_name`, `description`, `totalques`, `is_active`) VALUES
-(3, 'English', 'Grammar and Verbs', 4, 1),
+(3, 'English', 'Grammar and Verbs', 9, 1),
 (5, 'Math', 'Algebra and Derivatives', 0, 0),
 (6, 'English', 'VERBS', 0, 0),
-(7, 'English', 'Conjunction', 0, 1),
+(7, 'English', 'Conjunction', 2, 1),
 (8, 'Nepali', 'Grammar', 0, 1),
 (9, 'Science', 'Biology', 0, 1),
 (10, 'Math', 'Statistics', 0, 0);
@@ -85,30 +85,58 @@ INSERT INTO `optionss` (`id`, `category_id`, `category_name`, `option_`, `is_cor
 (14, 3, 'English', 'tiny', 0, 15, 0),
 (15, 3, 'English', 'is', 0, 15, 0),
 (16, 3, 'English', 'scrutinized', 0, 15, 0),
-(17, 3, 'English', 'is', 1, 16, 1),
-(18, 3, 'English', 'am', 0, 16, 1),
-(19, 3, 'English', 'her', 0, 16, 1),
-(20, 3, 'English', 'bd', 0, 16, 1),
+(17, 3, 'English', 'is', 1, 16, 0),
+(18, 3, 'English', 'am', 0, 16, 0),
+(19, 3, 'English', 'her', 0, 16, 0),
+(20, 3, 'English', 'bd', 0, 16, 0),
 (21, 3, 'English', 'is', 1, 17, 0),
 (22, 3, 'English', 'am', 0, 17, 0),
 (23, 3, 'English', 'her', 0, 17, 0),
 (24, 3, 'English', 'bd', 0, 17, 0),
-(25, 3, 'English', 'is', 0, 18, 1),
-(26, 3, 'English', 'am', 1, 18, 1),
-(27, 3, 'English', 'her', 0, 18, 1),
-(28, 3, 'English', 'bd', 0, 18, 1),
-(29, 3, 'English', 'is', 0, 19, 1),
-(30, 3, 'English', 'am', 1, 19, 1),
-(31, 3, 'English', 'her', 0, 19, 1),
-(32, 3, 'English', 'bd', 0, 19, 1),
+(25, 3, 'English', 'is', 0, 18, 0),
+(26, 3, 'English', 'am', 1, 18, 0),
+(27, 3, 'English', 'her', 0, 18, 0),
+(28, 3, 'English', 'bd', 0, 18, 0),
+(29, 3, 'English', 'is', 0, 19, 0),
+(30, 3, 'English', 'am', 1, 19, 0),
+(31, 3, 'English', 'her', 0, 19, 0),
+(32, 3, 'English', 'bd', 0, 19, 0),
 (33, 3, 'English', 'is', 1, 20, 0),
 (34, 3, 'English', 'am', 0, 20, 0),
 (35, 3, 'English', 'her', 0, 20, 0),
 (36, 3, 'English', 'bd', 0, 20, 0),
-(37, 3, 'English', 'is', 0, 21, 1),
-(38, 3, 'English', 'am', 1, 21, 1),
-(39, 3, 'English', 'her', 0, 21, 1),
-(40, 3, 'English', 'bd', 0, 21, 1);
+(37, 3, 'English', 'is', 0, 21, 0),
+(38, 3, 'English', 'am', 1, 21, 0),
+(39, 3, 'English', 'her', 0, 21, 0),
+(40, 3, 'English', 'bd', 0, 21, 0),
+(41, 7, 'English', 'noise', 0, 22, 1),
+(42, 7, 'English', 'tiny', 0, 22, 1),
+(43, 7, 'English', 'her', 0, 22, 1),
+(44, 7, 'English', 'scrutinized', 1, 22, 1),
+(45, 3, 'English', 'in', 0, 23, 1),
+(46, 3, 'English', 'at', 0, 23, 1),
+(47, 3, 'English', 'on', 0, 23, 1),
+(48, 3, 'English', 'onto', 1, 23, 1),
+(49, 3, 'English', 'A pack of wolves are howling in the distance.', 0, 24, 1),
+(50, 3, 'English', 'Each of the players has a special uniform.', 1, 24, 1),
+(51, 3, 'English', 'The group of musicians perform tonight.', 0, 24, 1),
+(52, 3, 'English', 'Everybody are ready for the test', 0, 24, 1),
+(53, 3, 'English', 'loudiest', 0, 25, 1),
+(54, 3, 'English', 'more loudly', 1, 25, 1),
+(55, 3, 'English', 'most loudly', 0, 25, 1),
+(56, 3, 'English', 'loudlier', 0, 25, 1),
+(57, 3, 'English', 'fastest', 0, 26, 1),
+(58, 3, 'English', 'more fastest', 0, 26, 1),
+(59, 3, 'English', 'faster', 1, 26, 1),
+(60, 3, 'English', 'most fast', 0, 26, 1),
+(61, 3, 'English', 'cheerful', 0, 27, 0),
+(62, 3, 'English', 'the more cheerfully', 0, 27, 0),
+(63, 3, 'English', 'cheerfulliest', 0, 27, 0),
+(64, 3, 'English', 'the most cheerfully', 1, 27, 0),
+(65, 7, 'English', 'brightlier', 0, 28, 1),
+(66, 7, 'English', 'brightliest', 0, 28, 1),
+(67, 7, 'English', 'more brightly', 0, 28, 1),
+(68, 7, 'English', 'most brightly', 1, 28, 1);
 
 -- --------------------------------------------------------
 
@@ -134,12 +162,19 @@ INSERT INTO `questions` (`id`, `category_name`, `catagorie_id`, `question`, `cor
 (13, 'English', 3, 'I ____ Hari', 'am', 0),
 (14, 'English', 3, 'I ____ Hari', 'am', 0),
 (15, 'English', 3, 'I ____ Hari', 'am', 0),
-(16, 'English', 3, 'who ____ don', 'is', 1),
+(16, 'English', 3, 'who ____ don', 'is', 0),
 (17, 'English', 3, 'I ____ Gaurav', 'is', 0),
-(18, 'English', 3, 'I ____ Gaurav', 'am', 1),
-(19, 'English', 3, 'I ____ Hari', 'am', 1),
+(18, 'English', 3, 'I ____ Gaurav', 'am', 0),
+(19, 'English', 3, 'I ____ Hari', 'am', 0),
 (20, 'English', 3, 'I ____ Hari', 'is', 0),
-(21, 'English', 3, 'I ____ DON', 'am', 1);
+(21, 'English', 3, 'I ____ DON', 'am', 0),
+(22, 'English', 7, 'Which word in the following sentence functions as an action verb? \"Despite the loud noise, the detective scrutinized the tiny clues on the carpet.\"', 'scrutinized', 1),
+(23, 'English', 3, 'Choose the correct preposition to complete the sentence: \"The cat jumped __________ the table and knocked over a vase.\"', 'onto', 1),
+(24, 'English', 3, 'Identify the sentence with the correct subject-verb agreement.', 'Each of the players has a special uniform.', 1),
+(25, 'English', 3, 'The girl yelled ____ than her sister.', 'more loudly', 1),
+(26, 'English', 3, 'Who is the ____ runner in the world?', 'faster', 1),
+(27, 'English', 3, 'Missy said hello ____ of everyone in her group of friends.', 'the most cheerfully', 0),
+(28, 'English', 7, 'This light shines ____ in a dim room.', 'most brightly', 1);
 
 -- --------------------------------------------------------
 
@@ -203,7 +238,15 @@ INSERT INTO `quiz_attempts` (`id`, `user_id`, `category_id`, `attempt_id`, `scor
 (41, 1, 3, 10, 0),
 (42, 1, 3, 11, 0),
 (43, 1, 3, 12, 0),
-(44, 1, 3, 13, 0);
+(44, 1, 3, 13, 0),
+(45, 2, 3, 30, 0),
+(46, 2, 7, 1, 0),
+(47, 2, 7, 2, 0),
+(48, 2, 7, 3, 0),
+(49, 2, 7, 4, 0),
+(50, 2, 3, 31, 0),
+(51, 2, 3, 32, 0),
+(52, 2, 3, 33, 0);
 
 -- --------------------------------------------------------
 
@@ -241,7 +284,15 @@ INSERT INTO `quiz_result` (`id`, `user_id`, `attempt_id`, `category_id`, `score`
 (14, 1, 10, 3, 2, 4),
 (15, 1, 11, 3, 0, 4),
 (16, 1, 12, 3, 1, 4),
-(17, 1, 13, 3, 4, 4);
+(17, 1, 13, 3, 4, 4),
+(18, 2, 30, 3, 2, 4),
+(19, 2, 1, 7, 0, 1),
+(20, 2, 2, 7, 0, 1),
+(21, 2, 3, 7, 1, 1),
+(22, 2, 4, 7, 0, 1),
+(23, 2, 31, 3, 2, 4),
+(24, 2, 32, 3, 3, 5),
+(25, 2, 33, 3, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -367,7 +418,33 @@ INSERT INTO `user_activity` (`id`, `session_id`, `user_id`, `activity`) VALUES
 (78, '0', 1, 'login'),
 (79, '0', 1, 'logout'),
 (80, '0', 2, 'login'),
-(81, '0', 2, 'logout');
+(81, '0', 2, 'logout'),
+(82, '0', 1, 'login'),
+(83, '0', 1, 'logout'),
+(84, '0', 2, 'login'),
+(85, '0', 2, 'logout'),
+(86, '0', 1, 'login'),
+(87, '0', 1, 'logout'),
+(88, '0', 2, 'login'),
+(89, '0', 2, 'logout'),
+(90, '0', 2, 'login'),
+(91, '0', 2, 'logout'),
+(92, '0', 1, 'login'),
+(93, '0', 1, 'logout'),
+(94, '0', 2, 'login'),
+(95, '0', 2, 'logout'),
+(96, '0', 2, 'login'),
+(97, '0', 2, 'logout'),
+(98, '0', 1, 'login'),
+(99, '0', 1, 'logout'),
+(100, '8', 1, 'login'),
+(101, '8', 1, 'logout'),
+(102, '76', 2, 'login'),
+(103, '76', 2, 'logout'),
+(104, '7', 1, 'login'),
+(105, '7', 1, 'logout'),
+(106, '0', 2, 'login'),
+(107, '0', 2, 'logout');
 
 -- --------------------------------------------------------
 
@@ -441,7 +518,26 @@ INSERT INTO `user_answer` (`id`, `user_id`, `attempt_id`, `category_id`, `questi
 (49, 1, 13, 3, 16, 'is', 1),
 (50, 1, 13, 3, 18, 'am', 1),
 (51, 1, 13, 3, 19, 'am', 1),
-(52, 1, 13, 3, 21, 'am', 1);
+(52, 1, 13, 3, 21, 'am', 1),
+(53, 2, 30, 3, 16, 'is', 1),
+(54, 2, 30, 3, 18, 'am', 1),
+(55, 2, 30, 3, 19, 'her', 0),
+(56, 2, 3, 7, 22, 'scrutinized', 1),
+(57, 2, 4, 7, 22, '', 0),
+(58, 2, 31, 3, 16, '', 0),
+(59, 2, 31, 3, 18, 'bd', 0),
+(60, 2, 31, 3, 19, 'am', 1),
+(61, 2, 31, 3, 21, 'am', 1),
+(62, 2, 32, 3, 23, 'onto', 1),
+(63, 2, 32, 3, 24, 'Each of the players has a special uniform.', 1),
+(64, 2, 32, 3, 25, 'loudiest', 0),
+(65, 2, 32, 3, 26, 'more fastest', 0),
+(66, 2, 32, 3, 27, 'the most cheerfully', 1),
+(67, 2, 33, 3, 23, 'at', 0),
+(68, 2, 33, 3, 24, 'Each of the players has a special uniform.', 1),
+(69, 2, 33, 3, 25, 'most loudly', 0),
+(70, 2, 33, 3, 26, 'more fastest', 0),
+(71, 2, 33, 3, 27, 'the more cheerfully', 0);
 
 --
 -- Indexes for dumped tables
@@ -519,25 +615,25 @@ ALTER TABLE `catagories`
 -- AUTO_INCREMENT for table `optionss`
 --
 ALTER TABLE `optionss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `quiz_attempts`
 --
 ALTER TABLE `quiz_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `quiz_result`
 --
 ALTER TABLE `quiz_result`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -549,13 +645,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_activity`
 --
 ALTER TABLE `user_activity`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `user_answer`
 --
 ALTER TABLE `user_answer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Constraints for dumped tables

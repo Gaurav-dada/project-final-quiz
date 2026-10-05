@@ -15,7 +15,7 @@ if (!$category_id) {
     exit;
 }
 
-$sql = "SELECT id FROM questions WHERE catagorie_id = ? ";
+$sql = "SELECT id FROM questions WHERE catagorie_id = ? AND is_active = 1";
 
 $stmt = $conn->prepare($sql);
 
