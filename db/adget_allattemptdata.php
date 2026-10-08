@@ -8,15 +8,17 @@ header('Content-Type: application/json');
 
 $attempt_id = $_GET['attempt_id'] ?? null;
 $userId     = $_GET['id'] ?? null;
+$category_id = $_GET['category_id'] ?? null;
 
 try {
 
-    if (!$attempt_id || !$userId) {
-        throw new Exception("Attempt ID or User ID is missing");
+    if (!$attempt_id || !$userId || !$category_id) {
+        throw new Exception("Attempt ID, User ID or Category ID is missing");
     }
 
     $attempt_id = (int)$attempt_id;
     $userId     = (int)$userId;
+    $category_id = (int)$category_id;
 
 
     $sql = "
@@ -24,6 +26,7 @@ try {
         FROM user_answer
         WHERE attempt_id = ?
         AND user_id = ?
+        AND category_id = ?
     ";
 
     $stmt = $conn->prepare($sql);
@@ -32,7 +35,7 @@ try {
         throw new Exception("Failed to prepare answer query");
     }
 
-    $stmt->bind_param("ii", $attempt_id, $userId);
+    $stmt->bind_param("iii", $attempt_id, $userId, $category_id);
 
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute answer query");
@@ -58,6 +61,7 @@ try {
         FROM quiz_result
         WHERE attempt_id = ?
         AND user_id = ?
+        AND category_id = ?
         LIMIT 1
     ";
 
@@ -67,7 +71,7 @@ try {
         throw new Exception("Failed to prepare quiz result query");
     }
 
-    $stmt->bind_param("ii", $attempt_id, $userId);
+    $stmt->bind_param("iii", $attempt_id, $userId, $category_id);
 
     if (!$stmt->execute()) {
         throw new Exception("Failed to execute quiz result query");

@@ -28,7 +28,7 @@ $sql = "SELECT
         FROM quiz_result
         WHERE category_id = ?
         AND user_id = ?
-        ORDER BY attempt_id ASC";
+        ORDER BY attempt_id DESC";
 
 $stmt = $conn->prepare($sql);
 

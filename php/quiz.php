@@ -407,14 +407,17 @@ async function startQuiz(category_id){
             category_id:category_id
         })
     });
-    const data = await res.json();  
-    attempt_id = data.attemptid; 
-     
-    start.style.display = "none";
+    const data = await res.json();
 
-    
-    next.style.display = "inline-block";
-    skip.style.display = "inline-block";
+    // attempt was not created, so do not start the quiz
+    if (!data.success) {
+        alert(data.message || "Could not start the quiz");
+        star.style.display = "block";
+        return false;
+    }
+
+    attempt_id = data.attemptid;
+    return true;
 }
 
 async function checkQuiz(id) {
@@ -461,11 +464,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 let currentId = new URLSearchParams(window.location.search).get("id");
 star.addEventListener("click",async ()=>{
     star.style.display="none";
-    next.style.display="block";
-    skip.style.display="block";
-   await getques(currentId);
-   await startQuiz(currentId);
-   startTimer(); 
+    // create the attempt first, then show the questions
+    const started = await startQuiz(currentId);
+    if (!started) return;
+    await getques(currentId);
+    startTimer();
 })
 
 

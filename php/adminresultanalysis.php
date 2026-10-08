@@ -63,11 +63,19 @@ if (!$user_id) {
            <div class="result-summary">
                 <h2>Quiz Result</h2>
                <div class="attemptnum">
+                    <label for="sortattempt">Sort:</label>
+                    <select id="sortattempt">
+                        <option value="latest">Latest first</option>
+                        <option value="oldest">Oldest first</option>
+                    </select>
+                    <label for="filterattempt">Filter:</label>
+                    <select id="filterattempt">
+                        <option value="all">All attempts</option>
+                        <option value="passed">Passed (50%+)</option>
+                        <option value="failed">Failed (below 50%)</option>
+                    </select>
                     <label for="attempt">Attempt:</label>
                     <select id="attempt">
-                        <!-- <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option> -->
                     </select>
                 </div>
                 <div class="score-box">
@@ -94,6 +102,8 @@ const section=document.getElementById("section") ;
 const scorebox=document.querySelector(".score-box")
 const tolques=document.getElementById("tolques");
 const attemptno=document.getElementById("attempt");
+const sortAttempt=document.getElementById("sortattempt");
+const filterAttempt=document.getElementById("filterattempt");
 const totalAttempted= document.getElementById("totalatte");
 const correctAnswers= document.getElementById("correctans");
 const wrongAnswers= document.getElementById("wrongans");
@@ -124,6 +134,24 @@ const analysis = document.querySelector(".analysis");
             option.textContent = element.fullname;
          sel_name.appendChild(option);
         })
+
+        // open the first user + category that has attempts
+        for (const u of data.data) {
+            const r = await fetch(`../db/getusercategory.php?id=${u.id}`);
+            const cats = await r.json();
+            for (const c of cats.data) {
+                const r2 = await fetch(`../db/admgetstud_quizhistory.php?user_id=${u.id}&num=${c.id}`);
+                const att = await r2.json();
+                if (att.success && att.data.length > 0) {
+                    sel_name.value = u.id;
+                    userid = u.id;
+                    await showcategory(u.id);
+                    sel_cat.value = c.id;
+                    await openCategory(c.id);
+                    return;
+                }
+            }
+        }
 
     }   
     username();
@@ -191,26 +219,23 @@ async function showcategory(id) {
 
     let category_id=null;
     
-sel_cat.addEventListener("change", async () => {
+sel_cat.addEventListener("change", () => {
+    openCategory(sel_cat.value);
+});
 
-    category_id = sel_cat.value;
+async function openCategory(id) {
 
-    console.log("Selected user:", userid);
-    console.log("Selected category:", category_id);
+    category_id = id;
 
     section.style.display = "block";
     scorebox.style.display = "none";
     analysis.style.display = "none";
 
     await attemptnum(userid, category_id);
-});
+}
 
 
 async function attemptnum(userId, categoryId) {
-
-    console.log("attemptnum called with:");
-    console.log("userId =", userId);
-    console.log("categoryId =", categoryId);
 
     try {
 
@@ -221,39 +246,9 @@ async function attemptnum(userId, categoryId) {
 
         const data = await res.json();
 
-        console.log("Attempt data:", data);
+        allAttempts = data.success ? data.data : [];
 
-        attemptno.innerHTML = "";
-
-        const placeholder = document.createElement("option");
-
-        placeholder.value = "";
-        placeholder.textContent = "Select Attempt";
-        placeholder.disabled = true;
-        placeholder.selected = true;
-
-        attemptno.appendChild(placeholder);
-
-        if (!data.success || data.data.length === 0) {
-            console.log("No attempts found");
-            return;
-        }
-
-        const uniqueAttempts = [
-            ...new Set(
-                data.data.map(e => e.attempt_id)
-            )
-        ];
-
-        uniqueAttempts.forEach(attempt => {
-
-            const option = document.createElement("option");
-
-            option.value = attempt;
-            option.textContent = `Attempt ${attempt}`;
-
-            attemptno.appendChild(option);
-        });
+        showAttempts();
 
     } catch (error) {
 
@@ -261,6 +256,54 @@ async function attemptnum(userId, categoryId) {
 
     }
 }
+
+let allAttempts = [];
+
+// filter + sort the attempts and fill the attempt dropdown
+function showAttempts() {
+    scorebox.style.display = "none";
+    analysis.style.display = "none";
+
+    let list = allAttempts.slice();
+
+    // filter
+    if (filterAttempt.value === "passed") {
+        list = list.filter(e => Number(e.score) * 2 >= Number(e.total_questions));
+    } else if (filterAttempt.value === "failed") {
+        list = list.filter(e => Number(e.score) * 2 < Number(e.total_questions));
+    }
+
+    // sort (latest = highest attempt number)
+    if (sortAttempt.value === "oldest") {
+        list.sort((a, b) => a.attempt_id - b.attempt_id);
+    } else {
+        list.sort((a, b) => b.attempt_id - a.attempt_id);
+    }
+
+    attemptno.innerHTML = "";
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = list.length > 0 ? "Select Attempt" : "No attempts found";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    attemptno.appendChild(placeholder);
+
+    list.forEach(e => {
+        const option = document.createElement("option");
+        option.value = e.attempt_id;
+        option.textContent = `Attempt ${e.attempt_id} (${e.score}/${e.total_questions})`;
+        attemptno.appendChild(option);
+    });
+
+    // open the first listed attempt (latest by default) so the page is never blank
+    if (list.length > 0) {
+        attemptno.selectedIndex = 1;
+        openAttempt();
+    }
+}
+
+sortAttempt.addEventListener("change", showAttempts);
+filterAttempt.addEventListener("change", showAttempts);
 
 let queslength=null;
 let attemptnumm=null;
@@ -271,7 +314,7 @@ async function resultatt(userid, value) {
     try {
 
         const res = await fetch(
-            `../db/adget_allattemptdata.php?attempt_id=${value}&id=${userid}`
+            `../db/adget_allattemptdata.php?attempt_id=${value}&id=${userid}&category_id=${category_id}`
         );
 
         if (!res.ok) {
@@ -363,10 +406,10 @@ console.log("TOTAL QUESTIONS:", data.total_questions);
         // SCORE
         // =========================
 
-        const scored = correct * 10;
+        const percent = totalQuestions > 0 ? Math.round(correct / totalQuestions * 100) : 0;
 
         score.textContent =
-            `Score: ${scored}`;
+            `Score: ${correct}/${totalQuestions} (${percent}%)`;
 
     } catch (error) {
 
@@ -377,13 +420,14 @@ console.log("TOTAL QUESTIONS:", data.total_questions);
 
 
 
- attemptno.addEventListener("change",async()=>{
+ attemptno.addEventListener("change",openAttempt)
+
+ async function openAttempt(){
     scorebox.style.display="block";
-     attemptnumm=attemptno.value;
+    attemptnumm=attemptno.value;
     await resultatt(userid,attemptnumm);
     await performance(userid,category_id,attemptnumm)
-   
- })
+ }
 let cor=0;
     async function performance(user_id,cat_id,att_id){
         analysis.style.display="block";
